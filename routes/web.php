@@ -21,7 +21,7 @@ Route::prefix('users')->group(function () {
         return view('layouts.clients');
     })->name('home');
     Route::get('/contact', function () {
-        return view('Contact');
+        return view('clients.contact');
     })->name('contact');
     Route::get('/about', function () {
         return view('About us page');
