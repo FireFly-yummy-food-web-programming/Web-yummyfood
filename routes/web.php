@@ -26,6 +26,9 @@ Route::prefix('users')->group(function () {
     Route::get('/about', function () {
         return view('About us page');
     })->name('about');
+    Route::get('/login', function () {
+        return view('clients.login');
+    })->name('login');
 });
 Route::prefix('admin')->group(function () {
     Route::get('/', [AdminController::class, 'index']);
