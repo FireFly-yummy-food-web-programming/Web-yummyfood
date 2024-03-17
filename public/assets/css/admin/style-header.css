@@ -1,0 +1,32 @@
+.search-bar{
+    margin-top: 15px;
+    padding-left: 10px;
+    border: 1px solid gray;
+    border-radius: 15px;
+    width: 324px;
+}
+#dashboar-search-input{
+    outline: none;
+    margin-left: 5px;;
+}
+#dashboar-avatar{
+    border-radius: 50%;
+    height: 90px;
+}
+#dashboard-avatar-title{
+    color: #474747;
+    margin-top: 32px; /* Loại bỏ margin mặc định */
+    font-family: Playfair Display;
+    font-size: 24px;
+    font-style: italic;
+    font-weight: 600;
+    line-height: 29.333px; /* 68.75% */
+    letter-spacing: -0.4px;
+}
+.dashboar-button-logout{
+    background-color: white;
+    border: none;
+}
+.dashboar-logout-icon{
+    font-size: 40px;
+}
