@@ -1,7 +1,7 @@
-.admin-dashboard-sidebar{
+.sidebar{
+    height: 100%;
     margin-top: 100px;
     background-color: #D9D9D9;
-    height: 100%    ;
 }
 .dashboard-sidebar-item>ul{
     list-style-type: none;

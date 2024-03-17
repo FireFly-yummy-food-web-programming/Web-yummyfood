@@ -1,8 +1,13 @@
+.navbar{
+    border-bottom: 1px solid #CCCCCC;
+    /* padding: 4px; */
+}
 .search-bar{
     margin-top: 15px;
     padding-left: 10px;
-    border: 1px solid gray;
-    border-radius: 15px;
+    padding: 10px;
+    border: 1px solid #CCCCCC;
+    border-radius: 25px;
     width: 324px;
 }
 #dashboar-search-input{
@@ -11,10 +16,11 @@
 }
 #dashboar-avatar{
     border-radius: 50%;
-    height: 90px;
+    height: 80px;
+    margin: 10px;
 }
 #dashboard-avatar-title{
-    color: #474747;
+    color: #CCCCCC;
     margin-top: 32px; /* Loại bỏ margin mặc định */
     font-family: Playfair Display;
     font-size: 24px;

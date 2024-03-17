@@ -1,4 +1,4 @@
 @extends('layouts.admin')
 @section('content')
-    <div ></div>
+    @include('admin.contents.dashboard')
 @endsection
