@@ -2,6 +2,7 @@
 
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\Admin\AdminController;
+use App\Http\Controllers\Clients\UserController;
 /*
 |--------------------------------------------------------------------------
 | Web Routes
@@ -26,7 +27,9 @@ Route::prefix('users')->group(function () {
     Route::get('/about', function () {
         return view('About us page');
     })->name('about');
+    Route::get('/register', [UserController::class, 'getRegister']);
 });
+
 Route::prefix('admin')->group(function () {
     Route::get('/', [AdminController::class, 'index']);
 });
