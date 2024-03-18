@@ -28,5 +28,6 @@ Route::prefix('users')->group(function () {
     })->name('about');
 });
 Route::prefix('admin')->group(function () {
-    Route::get('/', [AdminController::class, 'index']);
+    //Contacts
+    Route::get('/', [AdminController::class, 'getContacts'])->name('contact');
 });
