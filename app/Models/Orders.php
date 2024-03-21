@@ -9,13 +9,16 @@ use Illuminate\Support\Facades\DB;
 class Orders extends Model
 {
     use HasFactory;
-    protected $table = 'Dish';
-    public function getAllDish(){
-        $dishList = DB::select('SELECT dish.*, category.category_name
-        FROM dish
-        INNER JOIN category
-        ON dish.category_id = category.category_id;');
+    protected $table = 'Orders';
+    public function getAllOrders()
+    {
+        $orderList = DB::select('SELECT orders.*, users.Username, users.Email, order_detail.*
+        FROM orders
+                INNER JOIN users
+                ON orders.user_id = users.user_id
+                INNER JOIN order_detail
+                ON orders.order_id = order_detail.order_id;');
         // dd($dishList);
-        return $dishList;
+        return $orderList;
     }
 }
