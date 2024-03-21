@@ -10,10 +10,10 @@
         </a>
         <ul id="sidebar-manage" class="sidebar-collapse collapse" aria-labelledby="flush-headingTwo">
             <li class="sidebar-item"><a href="{{route('manage-orders')}}">Orders</a></li>
+            <li class="sidebar-item"><a href="{{route('manage-categories')}}">Categories</a></li>
             <li class="sidebar-item"><a href="{{route('manage-dish')}}">Dish</a></li>
-            <li class="sidebar-item"><a href="{{route('manage-banner')}}">Banner</a></li>
-            <li class="sidebar-item"><a href="{{route('manage-banner')}}">Banner</a></li>
-            <li class="sidebar-item"><a href="{{route('manage-users')}}">Users</a></li>
+            {{-- <li class="sidebar-item"><a href="{{route('manage-banner')}}">Banner</a></li> --}}
+            {{-- <li class="sidebar-item"><a href="{{route('manage-users')}}">Users</a></li> --}}
         </ul>
     </div>
     <div class="dashboard-sidebar-item">

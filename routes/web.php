@@ -4,6 +4,7 @@ use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\Admin\AdminController;
 use App\Http\Controllers\Admin\DishController;
 use App\Http\Controllers\Admin\OrdersController;
+use App\Http\Controllers\Admin\CategoriesController;
 /*
 |--------------------------------------------------------------------------
 | Web Routes
@@ -34,6 +35,7 @@ Route::prefix('admin')->group(function () {
     Route::get('/', [AdminController::class, 'getContacts'])->name('contact');
     Route::get('/manage-oders', [OrdersController::class, 'getAllOrders'])->name('manage-orders');
     Route::get('/manage-dish', [DishController::class, 'getDish'])->name('manage-dish');
+    Route::get('/manage-categoties', [CategoriesController::class, 'getAllCategories'])->name('manage-categories');
     // Route::get('/manage-users', [UsersController::class,'getContacts'])->name('manage-users');
     // Route::get('/manage-banner', [BannerController::class,'getContacts'])->name('manage-banner');
 });
