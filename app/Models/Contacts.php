@@ -13,10 +13,10 @@ class Contacts extends Model
     protected $table = 'contacts';
     public function getAllContacts()
     {
-        $contacts = DB::select('SELECT contacts.*, users.Name, users.Phone, users.Email
-        FROM contacts
-        INNER JOIN users ON contacts.user_id = users.user_id;');
-        // dd($contacts);
+        $contacts = DB::table($this->table)
+            ->join('users', 'contacts.user_id', '=', 'users.user_id')
+            ->select('contacts.*', 'users.Name', 'users.Phone', 'users.Email')
+            ->get();
         return $contacts;
     }
 }

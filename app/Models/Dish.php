@@ -9,13 +9,13 @@ use Illuminate\Support\Facades\DB;
 class Dish extends Model
 {
     use HasFactory;
-    protected $table = 'Dish';
-    public function getAllDish(){
-        $dishList = DB::select('SELECT dish.*, category.category_name
-        FROM dish
-        INNER JOIN category
-        ON dish.category_id = category.category_id;');
-        // dd($dishList);
+    protected $table = 'dish';
+    public function getAllDish()
+    {
+        $dishList = DB::table($this->table)
+            ->join('category', 'category.category_id', '=', 'dish.category_id')
+            ->select('dish.*', 'category.category_name')
+            ->get();
         return $dishList;
     }
 }

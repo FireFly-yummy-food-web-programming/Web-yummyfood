@@ -9,15 +9,14 @@ use Illuminate\Support\Facades\DB;
 class Orders extends Model
 {
     use HasFactory;
-    protected $table = 'Orders';
+    protected $table = 'orders';
     public function getAllOrders()
     {
-        $orderList = DB::select('SELECT orders.*, users.Username, users.Email, order_detail.*
-        FROM orders
-                INNER JOIN users
-                ON orders.user_id = users.user_id
-                INNER JOIN order_detail
-                ON orders.order_id = order_detail.order_id;');
+        $orderList = DB::table($this->table)
+            ->join('users', 'orders.user_id', '=', 'users.user_id')
+            ->join('order_detail', 'order_detail.order_id', '=', 'orders.order_id')
+            ->select('orders.*', 'users.Username', 'users.Email', 'order_detail.*')
+            ->get();
         // dd($dishList);
         return $orderList;
     }
