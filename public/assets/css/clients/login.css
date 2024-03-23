@@ -10,6 +10,11 @@
     background-color: rgba(249, 249, 247, 0.9); 
     height: 400px !important;   
 }
+.error-message {
+    color: red;
+    font-size: 14px;
+    margin-top: 5px;
+}
 .bg-2{
     background-color: white !important;
     height: 400px !important; 
