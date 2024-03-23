@@ -7,7 +7,6 @@ use Illuminate\Http\Request;
 
 class UserController extends Controller
 {
-    public function getRegister(){
-        return view('clients.blocks.register');
-    }
+    
+    
 }
