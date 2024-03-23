@@ -2,6 +2,9 @@
 
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\Admin\AdminController;
+use App\Http\Controllers\Clients\UserController;
+use App\Http\Controllers\Auth\RegisterController;
+
 use App\Http\Controllers\LoginController;
 /*
 |--------------------------------------------------------------------------
@@ -27,10 +30,8 @@ Route::prefix('users')->group(function () {
     Route::get('/about', function () {
         return view('About us page');
     })->name('about');
-    Route::get('/login', [LoginController::class, 'showLoginForm'])->name('login');
-    Route::get('/logout', [LoginController::class, 'logout'])->name('logout');
-    Route::post('/login', [LoginController::class, 'post'])->name('login.post');
 });
+
 Route::prefix('admin')->group(function () {
     Route::get('/', [AdminController::class, 'index']);
 });
