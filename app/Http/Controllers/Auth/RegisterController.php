@@ -25,7 +25,7 @@ class RegisterController extends Controller
             ],
             'password' => 'required|min:6',
             'name' => 'required',
-            'phone' => 'nullable|regex:/^[0-9\s]+$/|unique:phone',
+            'phone' => 'nullable|regex:/^[0-9\s]+$/|unique:users',
             'email' => 'required|email|unique:users',
         ]);
 
