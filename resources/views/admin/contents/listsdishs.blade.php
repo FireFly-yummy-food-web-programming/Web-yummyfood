@@ -5,7 +5,7 @@
         <p>Search: <input type="text" name="search" id="dashboar-search-input" class="search-bar" placeholder="Search..." style="font-size:16px;;"></p>
     </div>
 </div>
-    <a href="#" class="btn btn-primary">Add</a>
+    <a href="{{route('add-dish')}}" class="btn btn-primary">Add</a>
     <table class="table table-bordered">
         <thead>
             <tr>
@@ -25,7 +25,8 @@
                     <td>{{$index+1}}</td>
                     <td>{{$dish->dish_name}}</td>
                     <td>{{$dish->category_name}}</td>
-                    <td><img src="{{$dish->image_dish}}" alt="image" style="width:70%"></td>
+                    <td><img src="{{ asset('assets/images/'. $dish->image_dish) }}" alt="image" style="width:70%">
+                    </td>
                     <td>{{$dish->details}}</td>
                     <td>{{$dish->price}}</td>
                     <td>

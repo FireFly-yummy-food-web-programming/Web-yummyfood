@@ -42,6 +42,13 @@ Route::prefix('admin')->group(function () {
     Route::post('/edit-category/{id}', [CategoriesController::class, 'postEditCategory'])->name('post-edit-category');
     Route::get('/manage-oders', [OrdersController::class, 'getAllOrders'])->name('manage-orders');
     Route::get('/manage-dish', [DishController::class, 'getDish'])->name('manage-dish');
+    Route::get('/add-dish', [DishController::class, 'getFormAdddish'])->name('add-dish');
+    Route::post('/add-dish', [DishController::class, 'postAdddish'])->name('post-add-dish');
+    Route::post('/delete-dish/{id}', [DishController::class, 'deletedish'])->name('delete-dish');
+    Route::post('/restore-dish/{id}', [DishController::class, 'Restoredish'])->name('restore-dish');
+    Route::get('/edit-dish/{id}', [DishController::class, 'getFormEditdish'])->name('edit-dish');
+    Route::post('/edit-dish/{id}', [DishController::class, 'postEditdish'])->name('post-edit-category');
+    
 
     // Route::get('/manage-users', [UsersController::class,'getContacts'])->name('manage-users');
     // Route::get('/manage-banner', [BannerController::class,'getContacts'])->name('manage-banner');
