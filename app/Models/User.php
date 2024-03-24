@@ -15,4 +15,10 @@ class User extends Model
     protected $fillable = [
         'Username', 'Password', 'Name', 'Phone', 'Email', 'role',
     ];
+    protected $table = 'users';
+
+    public function validatePassword($password)
+    {
+        return password_verify($password, $this->Password);
+    }
 }

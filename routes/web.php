@@ -5,6 +5,7 @@ use App\Http\Controllers\Admin\AdminController;
 use App\Http\Controllers\Clients\UserController;
 use App\Http\Controllers\Auth\RegisterController;
 
+use App\Http\Controllers\LoginController;
 /*
 |--------------------------------------------------------------------------
 | Web Routes
@@ -31,6 +32,10 @@ Route::prefix('users')->group(function () {
     })->name('about');
     Route::get('/register', [RegisterController::class, 'getRegister']);
     Route::post('/register', [RegisterController::class, 'postRegister'])->name('register');
+    Route::get('/login', [LoginController::class, 'showLoginForm'])->name('login');
+    Route::get('/logout', [LoginController::class, 'logout'])->name('logout');
+    Route::post('/login', [LoginController::class, 'post'])->name('login.post');
+
 });
 
 Route::prefix('admin')->group(function () {
