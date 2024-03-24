@@ -19,7 +19,7 @@ class RegisterController extends Controller
                 'unique:users',
                 function ($attribute, $value, $fail) {
                     if (strpos($value, ' ') !== false) {
-                        $fail('The '.$attribute.' cannot contain spaces.');
+                        $fail('The ' . $attribute . ' cannot contain spaces.');
                     }
                 },
             ],
@@ -38,12 +38,13 @@ class RegisterController extends Controller
         $user->Email = $request->email;
         $user->role = 'customer';
         $user->save();
-        
+
         // Redirect to login page or any other page
-        return redirect('/login')->with('success', 'Registration successful. Please login.')->withInput();
+        return redirect(route('users.login'))->with('success', 'Registration successful. Please login.')->withInput();
     }
 
-    public function getRegister(){
-        return view('clients.blocks.register');
+    public function getRegister()
+    {
+        return view('clients.register');
     }
 }

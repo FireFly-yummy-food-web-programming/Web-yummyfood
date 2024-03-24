@@ -12,7 +12,7 @@
     <div class="container-fluid bg-2 p-5 bg-white " id="bg-2">
     </div>
     <div class="container">
-    <form method="post" action="{{ route('register') }}">
+    <form method="post" action="{{ route('users.register') }}">
         @csrf
         <div class="row d-flex justify-content-between pb-2">
             <div class="col-md-6" style="padding: 0;width:48%">
@@ -55,7 +55,7 @@
         </div>
         <div class="row p-1"></div>
         <div class="row d-flex flex-column align-items-center justify-content-center text-center">
-            <p class="">You have an account? <a href="/login">Login now</a></p>
+            <p class="">You have an account? <a href="{{route('users.login')}}">Login now</a></p>
             <button type="submit" class="button">Register</button>
         </div>
     </form>
