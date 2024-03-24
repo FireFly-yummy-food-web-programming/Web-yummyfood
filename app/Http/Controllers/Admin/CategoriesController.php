@@ -27,10 +27,9 @@ class CategoriesController extends Controller
     public function postAddCategory(Request $request)
     {
         $request->validate([
-            'category_name' => 'required|min:5',
+            'category_name' => 'required',
         ], [
             'category_name.required' => 'Requires entering a category name',
-            'category_name.min' => 'Full name must be :min characters or more',
         ]);
 
         $dataInsert = $request->category_name; //category_name là tên name trong for
@@ -41,9 +40,9 @@ class CategoriesController extends Controller
     {
 
         if (!empty($id)) {
-            $userDetail = $this->categories->getCategoryDetail($id);
-            if (!empty($userDetail[0])) {
-                $deleteStatus = $this->categories->deleteCategory($id);
+            $categoryDetail = $this->categories->getCategoryDetail($id);
+            if (!empty($categoryDetail[0])) {
+                $deleteStatus = $this->categories->deleteCag($id);
                 if ($deleteStatus) {
                     $msg = "Delete category successfully";
                 } else {
@@ -59,7 +58,41 @@ class CategoriesController extends Controller
     }
     public function RestoreCategory($id)
     {
-        $this->categories->RestoreCategory($id);
+        $this->categories->RestoreCag($id);
         return redirect()->route('manage-categories')->with('msg', "Restore category successful");
+    }
+    public function getFormEditCategory(Request $request, $id = 0)
+    {
+        $title = "Edit Category";
+        if (!empty($id)) {
+            $categoryDetail = $this->categories->getCategoryDetail($id);
+            if (!empty($categoryDetail[0])) {
+                $request->session()->put('category_id', $id);
+                $categoryDetail = $categoryDetail[0];
+                // dd(session('category_id'));
+            } else {
+                return redirect()->route('manage-categories')->with('msg', 'This category does not exist');
+            }
+        } else {
+            return redirect()->route('manage-categories')->with('msg', 'Link does not exist');
+        }
+        return view('admin.categories.edit', compact('title', 'categoryDetail'));
+    }
+    public function postEditCategory(Request $request)
+    {
+        $id = session('category_id');
+        if (empty($id)) { {
+                return back()->with('msg', 'Link does not exist');
+            }
+        }
+        $request->validate([
+            'category_name' => 'required',
+        ], [
+            'category.required' => 'Category name is required',
+        ]);
+        $category_name = $request->category_name;
+        $updated_at = now();
+        $this->categories->EditCag($id, $category_name, $updated_at);
+        return back()->with('msg', 'Updated directory successfully');
     }
 }

@@ -27,7 +27,7 @@
                     <td>{{$category->category_name}}</td>
                     <td>{{$category->created_at}}</td>
                     <td>
-                        <a href="#" class="btn btn-success btn-sm"><i class="fa-solid fa-pencil"></i></a>
+                        <a href="{{route('edit-category',['id'=>$category->category_id])}}" class="btn btn-success btn-sm"><i class="fa-solid fa-pencil"></i></a>
                         <button type="button" class="btn btn-light border-white bg-white" onclick="handleDelete({{$category->category_id}})">
                             <a href="#" class="btn btn-danger btn-sm"><i class="fa-solid fa-trash"></i></a>
                         </button>
@@ -91,7 +91,7 @@
         <tr>
             <th>Numerical</th>
             <th>Name</th>
-            <th>Created_at</th>
+            <th>Deleted_at</th>
             <th>Action</th>
         </tr>
     </thead>
@@ -102,9 +102,9 @@
                 <tr colspan = "6">
                     <td>{{$index+1}}</td>
                     <td>{{$category->category_name}}</td>
-                    <td>{{$category->created_at}}</td>
+                    <td>{{$category->deleted_at}}</td>
                     <td>
-                        <a href="#" class="btn btn-success btn-sm"><i class="fa-solid fa-pencil"></i></a>
+                        <a href="{{route('edit-category',['id'=>$category->category_id])}}" class="btn btn-success btn-sm"><i class="fa-solid fa-pencil"></i></a>
                         <button type="button" class="btn btn-light border-white bg-white" onclick="handleRestore({{$category->category_id}})">
                             <a href="#" class="btn btn-success btn-sm">Restore</a>
                         </button>

@@ -35,16 +35,24 @@ class Category extends Model
             ->where('category_id', '=', $id)
             ->get();
     }
-    public function deleteCategory($id)
+    public function deleteCag($id)
     {
         $category = $this->findOrFail($id);
         $category->delete();
-        return redirect()->route('manage-categories');
     }
-    public function RestoreCategory($id)
+    public function RestoreCag($id)
     {
         $category = $this->withTrashed()->findOrFail($id);
         $category->restore();
-        return redirect()->route('manage-categories');
     }
+    public function EditCag($id, $category_name, $updated_at)
+    {
+        DB::table($this->table)
+            ->where('category_id', $id)
+            ->update([
+                'category_name' => $category_name,
+                'updated_at' => $updated_at
+            ]);
+    }
+    
 }

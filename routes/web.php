@@ -38,6 +38,8 @@ Route::prefix('admin')->group(function () {
     Route::post('/add-category', [CategoriesController::class, 'postAddCategory'])->name('post-add-category');
     Route::post('/delete-category/{id}', [CategoriesController::class, 'deleteCategory'])->name('delete-category');
     Route::post('/restore-category/{id}', [CategoriesController::class, 'RestoreCategory'])->name('restore-category');
+    Route::get('/edit-category/{id}', [CategoriesController::class, 'getFormEditCategory'])->name('edit-category');
+    Route::post('/edit-category/{id}', [CategoriesController::class, 'postEditCategory'])->name('post-edit-category');
     Route::get('/manage-oders', [OrdersController::class, 'getAllOrders'])->name('manage-orders');
     Route::get('/manage-dish', [DishController::class, 'getDish'])->name('manage-dish');
 
