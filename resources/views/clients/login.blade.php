@@ -10,7 +10,7 @@
     <div class="container-fluid bg-2 p-5 bg-white" id="bg-2">
     </div>
     <div class="container">
-        <form action="{{ route('login.post') }}" method="post">
+        <form action="{{ route('users.login.post') }}" method="post">
             @csrf
             <div class="row">
                 <label for="Username" class="col-form-label custom-label">Username</label>
@@ -33,7 +33,7 @@
                 @endif
             </div>
             <div class="row d-flex flex-column align-items-center justify-content-center pt-4 text-center">
-                <p class="">You don't have an account? <a href="register">Register now</a></p>
+                <p class="">You don't have an account? <a href="{{route('users.register')}}">Register now</a></p>
                 <button type="submit" class="btn btn-primary" style="background-color: #AD343E; border: 1px solid black; border-radius: 118px;">Login</button>
             </div>
         </form>

@@ -44,10 +44,16 @@
                 <a class="nav-link active users-navbar-home" aria-current="page" href="{{ route('home') }}" style="padding-top: 50px;">Home</a>
             </li>
             <li class="nav-item">
-              <a class="nav-link active users-navbar-contactus" aria-current="page" href="{{route('contact')}}" style="padding-top: 50px;">Contact us</a>
+              <a class="nav-link active users-navbar-contactus" aria-current="page" href="{{route('users.contact')}}" style="padding-top: 50px;">Contact us</a>
             </li>
             <li class="nav-item">
-                <a class="nav-link active users-navbar-contactus" aria-current="page" href="{{route('about')}}" style="padding-top: 50px;">About us</a>
+                <a class="nav-link active users-navbar-contactus" aria-current="page" href="{{route('users.about')}}" style="padding-top: 50px;">About us</a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link active users-navbar-contactus" aria-current="page" href="{{route('users.login')}}" style="padding-top: 50px;">Log in</a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link active users-navbar-contactus" aria-current="page" href="{{route('users.register')}}" style="padding-top: 50px;">Sign in</a>
             </li>
             <div>
             @if (session('logged_in'))
@@ -56,7 +62,7 @@
                     <img src="https://cdn.sforum.vn/sforum/wp-content/uploads/2023/11/avatar-dep-89.jpg" alt="avatar" style="width: 50px;height:50px;border-radius:50%; margin-left:170px;">
                 </a>
                 <ul class="dropdown-menu" aria-labelledby="userDropdown">
-                    <li><a class="dropdown-item" href="{{ route('logout') }}">Logout</a></li>
+                    <li><a class="dropdown-item" href="{{route('users.logout') }}">Logout</a></li>
                 </ul>
             </li>
             @endif
