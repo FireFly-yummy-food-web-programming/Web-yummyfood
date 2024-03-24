@@ -37,7 +37,7 @@
             @if(!empty($contactsList))
                 @foreach($contactsList as $index => $contact)
                 <tr colspan = "6">
-                    <td>{{$index++}}</td>
+                    <td>{{$index+1}}</td>
                     <td>{{$contact->Name}}</td>
                     <td>{{$contact->Email}}</td>
                     <td>{{$contact->Phone}}</td>

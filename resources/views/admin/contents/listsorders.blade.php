@@ -26,7 +26,7 @@
         @if(!empty($listOrders))
             @foreach($listOrders as $index => $order)
             <tr colspan = "6">
-                <td>{{$index++}}</td>
+                <td>{{$index+1}}</td>
                 <td>{{$order->Username}}</td>
                 <td>{{$order->dish_name}}</td>
                 <td>{{$order->quantity}}</td>

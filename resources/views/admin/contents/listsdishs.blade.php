@@ -22,7 +22,7 @@
             @if(!empty($listDish))
                 @foreach($listDish as $index => $dish)
                 <tr colspan = "6">
-                    <td>{{$index++}}</td>
+                    <td>{{$index+1}}</td>
                     <td>{{$dish->dish_name}}</td>
                     <td>{{$dish->category_name}}</td>
                     <td><img src="{{$dish->image_dish}}" alt="image" style="width:70%"></td>

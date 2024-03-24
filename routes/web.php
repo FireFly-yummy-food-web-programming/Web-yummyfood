@@ -33,9 +33,14 @@ Route::prefix('users')->group(function () {
 Route::prefix('admin')->group(function () {
     //Contacts
     Route::get('/', [AdminController::class, 'getContacts'])->name('contact');
+    Route::get('/manage-categoties', [CategoriesController::class, 'getAllCategories'])->name('manage-categories');
+    Route::get('/add-category', [CategoriesController::class, 'getFormAddCategory'])->name('add-category');
+    Route::post('/add-category', [CategoriesController::class, 'postAddCategory'])->name('post-add-category');
+    Route::post('/delete-category/{id}', [CategoriesController::class, 'deleteCategory'])->name('delete-category');
+    Route::post('/restore-category/{id}', [CategoriesController::class, 'RestoreCategory'])->name('restore-category');
     Route::get('/manage-oders', [OrdersController::class, 'getAllOrders'])->name('manage-orders');
     Route::get('/manage-dish', [DishController::class, 'getDish'])->name('manage-dish');
-    Route::get('/manage-categoties', [CategoriesController::class, 'getAllCategories'])->name('manage-categories');
+
     // Route::get('/manage-users', [UsersController::class,'getContacts'])->name('manage-users');
     // Route::get('/manage-banner', [BannerController::class,'getContacts'])->name('manage-banner');
 });
