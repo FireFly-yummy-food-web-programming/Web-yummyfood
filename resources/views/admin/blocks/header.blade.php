@@ -1,8 +1,8 @@
 <header>
     <nav class="navbar default-layout-navbar col-lg-12 col-12 p-0 fixed-top d-flex flex-row">
         <div class="text-center navbar-brand-wrapper d-flex align-items-center justify-content-center">
-                <?php 
-                function createLogo($fill1, $fill2)
+            <?php 
+            function createLogo($fill1, $fill2)
                 {
                         echo "<div class='logo-container'>
                         <svg xmlns='http://www.w3.org/2000/svg' width='57' height='55' viewBox='0 0 57 55' fill='none'>
@@ -26,23 +26,23 @@
                         <h4 class='logo-title' style='color: $fill2;' >Yummy Food</h4>
                     </div>";
                 }
-                createLogo("#AD343E", "#474747");
-                ?>
+        ?>
+            {{createLogo("#AD343E", "#474747");}}
         </div>
         <div class="search-field d-none d-md-block">
-            <div class="input-group d-flex align-items-center search-bar">
+            {{-- <div class="input-group d-flex align-items-center search-bar">
                 <div class="input-group-prepend bg-transparent">
-                    <i class="fa-solid fa-magnifying-glass"></i>
+                    <button type="submit" style="border: none; background-color: rgba(255, 255, 255, 0)"><i class="fa-solid fa-magnifying-glass"></i></button>
                 </div>
                 <input type="text" name="search-product" class="border-0 " id="dashboar-search-input"
                     placeholder="Search...">
-            </div>
+            </div> --}}
         </div>
         <div class="d-flex">
             <img src="{{asset('assets/images/avatar-admin.jpg')}}" alt="Avatar of admin" id="dashboar-avatar">
         </div>
         <div>
-            <button class="dashboar-button-logout">
+            <button class="dashboar-button-logout"  style="background-color: rgba(255, 255, 255, 0)">
                 <i class="fa fa-sign-out dashboar-logout-icon"></i>
             </button>
         </div>
