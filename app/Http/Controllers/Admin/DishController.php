@@ -18,4 +18,10 @@ class DishController extends Controller
         $listDish = $this->dishs->getAllDish();
         return view('admin.dashboard.dishs', compact('title', 'listDish'));
     }
+
+    public function getDetail($id)
+    {
+        $dish = Dish::findOrFail($id);
+        return view('clients.detail', compact('dish'));
+    }
 }
