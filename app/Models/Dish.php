@@ -18,4 +18,21 @@ class Dish extends Model
             ->get();
         return $dishList;
     }
+    public function getCategories()
+    {
+        $listCategories =  DB::table('category')
+            ->select('category.*')
+            ->get();
+        return $listCategories;
+    }
+    public function addDish($dishName, $categoryId, $image, $detail, $price)
+    {
+        DB::table($this->table)->insert([
+            'dish_name' => $dishName,
+            'category_id' => $categoryId,
+            'image_dish' => $image,
+            'details' => $detail,
+            'price' => $price
+        ]);
+    }
 }

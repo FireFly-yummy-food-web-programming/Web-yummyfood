@@ -85,7 +85,7 @@
       </div>
 </form>
 {{-- Trash listCategories --}}
-<h3>{{$title}}</h3>
+<h3>Trash</h3>
 <table class="table table-bordered">
     <thead>
         <tr>
