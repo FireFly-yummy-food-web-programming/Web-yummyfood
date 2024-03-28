@@ -10,6 +10,7 @@ class Dish extends Model
 {
     use HasFactory;
     protected $table = 'dish';
+    protected $primaryKey = 'dish_id';
     public function getAllDish()
     {
         $dishList = DB::table($this->table)
@@ -67,5 +68,10 @@ class Dish extends Model
     {
         $dish = $this->findOrFail($id);
         $dish->delete();
+    }
+    public function RestoreDish($id)
+    {
+        $dish = $this->withTrashed()->findOrFail($id);
+        $dish->restore();
     }
 }

@@ -12,6 +12,7 @@ class Category extends Model
     use HasFactory;
     use SoftDeletes;
     protected $table = 'category';
+    protected $primaryKey = 'category_id';
     public function getAllCategories()
     {
         $categoryList = DB::table($this->table)

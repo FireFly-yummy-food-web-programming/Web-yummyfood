@@ -17,8 +17,8 @@ function handleDeleteDish(id) {
     // console.log(form.action);
     }
     
-    function handleRestoreD(id) {
-    var form = document.getElementById('restoreDishForm');
-    form.action = '/admin/restore-dish/' + id;
-    $('#restore_dish_modal').modal('show');
-    }
+function handleRestoreDish(id) {
+var form = document.getElementById('');
+form.action = '/admin/restore-dish/' + id;
+$('#restore_dish_modal').modal('show');
+}

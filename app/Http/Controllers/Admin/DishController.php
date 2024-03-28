@@ -144,6 +144,11 @@ class DishController extends Controller
         } else {
             $msg = 'Link does not exist';
         }
-        return redirect()->route('manage-dishs')->with('msg', $msg);
+        return redirect()->route('manage-dish')->with('msg', $msg);
+    }
+    public function RestoreDish($id)
+    {
+        $this->dishs->RestoreDish($id);
+        return redirect()->route('manage-dish')->with('msg', "Restore Dish successful");
     }
 }
