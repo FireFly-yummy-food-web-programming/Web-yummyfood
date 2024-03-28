@@ -25,14 +25,47 @@ class Dish extends Model
             ->get();
         return $listCategories;
     }
-    public function addDish($dishName, $categoryId, $image, $detail, $price)
+    public function getImage($id)
     {
-        DB::table($this->table)->insert([
-            'dish_name' => $dishName,
-            'category_id' => $categoryId,
-            'image_dish' => $image,
-            'details' => $detail,
-            'price' => $price
-        ]);
+        return DB::table($this->table)
+            ->select('image_dish')
+            ->where('dish_id', $id)
+            ->first();
+    }
+    public function addDish($data)
+    {
+        $dish = new Dish();
+        $dish->dish_name = $data['dish_name'];
+        $dish->category_id = $data['category_id'];
+        $dish->image_dish = $data['image_dish'];
+        $dish->details = $data['detail'];
+        $dish->price = $data['price'];
+        $dish->save();
+    }
+    public function getDishDetail($id)
+    {
+        return DB::table($this->table)
+            ->select('dish.*')
+            ->where('dish_id', '=', $id)
+            ->get();
+    }
+    public function EditDish($id, $data)
+    {
+        DB::table($this->table)
+            ->where('dish_id', $id)
+            ->update([
+                'dish_name' => $data['dish_name'],
+                'category_id' => $data['category_id'],
+                'price' => $data['price'],
+                'details' => $data['detail'],
+                'image_dish' => $data['image_dish'],
+            ]);
+    }
+
+
+    public function deleteDish($id)
+    {
+        $dish = $this->findOrFail($id);
+        $dish->delete();
     }
 }

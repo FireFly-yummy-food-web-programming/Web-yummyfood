@@ -12,8 +12,6 @@ class Category extends Model
     use HasFactory;
     use SoftDeletes;
     protected $table = 'category';
-    protected $primaryKey = 'category_id';
-    protected $dates = ['deleted_at'];
     public function getAllCategories()
     {
         $categoryList = DB::table($this->table)
@@ -21,12 +19,11 @@ class Category extends Model
             ->get();
         return $categoryList;
     }
-    public function addCategory($category_name)
+    public function addCategory($data)
     {
-        $category = DB::table($this->table)->insert([
-            'category_name' => $category_name
-        ]);
-        return $category;
+        $category = new Category();
+        $category->category_name = $data['category_name'];
+        $category->save();
     }
     public function getCategoryDetail($id)
     {
@@ -54,5 +51,4 @@ class Category extends Model
                 'updated_at' => $updated_at
             ]);
     }
-    
 }

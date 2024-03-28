@@ -15,7 +15,7 @@
                 <th>Images</th>
                 <th>Details</th>
                 <th>Price</th>
-                <th style="width:90px;">Action</th>
+                <th style="width: 120px;">Action</th>
             </tr>
         </thead>
         <tbody>
@@ -25,13 +25,16 @@
                     <td>{{$index+1}}</td>
                     <td>{{$dish->dish_name}}</td>
                     <td>{{$dish->category_name}}</td>
-                    <td><img src="{{ asset('assets/images/'. $dish->image_dish) }}" alt="image" style="width:70%">
+                    <td><img src="{{ asset('storage/images/'. $dish->image_dish) }}" alt="image" style="width:70%">
                     </td>
                     <td>{{$dish->details}}</td>
                     <td>{{$dish->price}}</td>
                     <td>
-                        <a href="#" class="btn btn-danger btn-sm"><i class="fa-solid fa-trash"></i></a>
-                        <a href="#" class="btn btn-success btn-sm"><i class="fa-solid fa-pencil"></i></a>
+                        {{-- {{route('edit-dish',['id'=>$dish->dish_id])}} --}}
+                        <a href="{{route('edit-dish',['id'=>$dish->dish_id ])}}" class="btn btn-success btn-sm"><i class="fa-solid fa-pencil"></i></a>
+                        <button type="button" class="btn btn-light border-white bg-white" onclick="handleDeleteDish({{$dish->dish_id}})">
+                            <a href="#" class="btn btn-danger btn-sm"><i class="fa-solid fa-trash"></i></a>
+                        </button>
                     </td>    
                 </tr>
                 @endforeach
@@ -39,3 +42,48 @@
         </tbody>
     </table>
 </div>
+<form action="" method="POST" id="deleteDishForm">
+    @csrf
+    {{-- @method('DELETE') --}}
+    <div class="modal fade" id="delete_dish_modal" tabindex="-1" aria-labelledby="delete_dishLabel" aria-hidden="true">
+        <div class="modal-dialog">
+          <div class="modal-content">
+            <div class="modal-header">
+              <h5 class="modal-title" id="delete_dishLabel">Delete</h5>
+              <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body">
+                <p>Are you sure you want to delete this dish?</p>
+            </div>
+            <div class="modal-footer">
+              <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+              <button type="submit" class="btn btn-danger">Yes, Delete</button>
+            </div>
+          </div>
+        </div>
+      </div>
+</form>
+{{-- Form confirm restoredishForm --}}
+<form action="" method="POST" id="restoreDishForm">
+    @csrf
+    <div class="modal fade" id="restore_dish_modal" tabindex="-1" aria-labelledby="restore_dishLabel" aria-hidden="true">
+        <div class="modal-dialog">
+          <div class="modal-content">
+            <div class="modal-header">
+              <h5 class="modal-title" id="restore_dishLabel">Restore</h5>
+              <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body">
+                <p>Are you sure you want to restore {{$dish->dish_name}} dish?</p>
+            </div>
+            <div class="modal-footer">
+              <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+              <button type="submit" class="btn btn-primary">Yes, Restore</button>
+            </div>
+          </div>
+        </div>
+      </div>
+</form>
+@section('js')
+<script src="{{asset('assets/js/modaldelete.js')}}"></script>
+@endsection
