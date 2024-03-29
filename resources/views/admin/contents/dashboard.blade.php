@@ -36,24 +36,28 @@
         <tbody>
             @if(!empty($contactsList))
                 @foreach($contactsList as $index => $contact)
-                <tr colspan = "6">
+                <tr colspan="6">
                     <td>{{$index+1}}</td>
                     <td>{{$contact->Name}}</td>
                     <td>{{$contact->Email}}</td>
                     <td>{{$contact->Phone}}</td>
                     <td>{{$contact->subject}}</td>
                     <td>{{$contact->message}}</td>
-                    <td>
-                        <select id="statusSelect" onchange="changeColor()">
-                            <option value="active" id="status">{{$contact->status}}</option>
+                    <form action="{{ route('contacts.updateStatus') }}" method="POST">
+                        <td>
+                            <select name="status" onchange="this.form.submit()">
+                                <option value="active" id="status">{{$contact->status}}</option>
                                 @if(($contact->status == 'Pending'))
                                     <option id="status-processed" value="Processed">Processed</option>
                                 @endif
                                 @if(($contact->status == 'Processed'))
                                     <option id="status-pending" value="pending">Pending</option>
                                 @endif
-                        </select>
-                    </td>    
+                            </select>
+                            @csrf
+                            <input type="hidden" name="contact_id" value="{{$contact->contact_id}}">
+                        </td>
+                    </form>
                 </tr>
                 @endforeach
             @endif
@@ -61,6 +65,11 @@
     </table>
     </div>
 </div>
+{{-- <script>
+    var updateStatusUrl = '{{ route("contacts.updateStatus") }}';
+</script>
+<script src="{{ asset('assets/js/contacts.js') }}"></script>
+<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script> --}}
 @section('css')
     <style>
         #statusSelect{

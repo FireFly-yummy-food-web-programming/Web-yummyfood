@@ -39,6 +39,7 @@ Route::prefix('users')->name('users.')->group(function () {
 Route::prefix('admin')->group(function () {
     //Contacts
     Route::get('/', [AdminController::class, 'getContacts'])->name('contact');
+    Route::post('/contacts/update-status', [AdminController::class, 'updateStatus'])->name('contacts.updateStatus');
     Route::get('/manage-categoties', [CategoriesController::class, 'getAllCategories'])->name('manage-categories');
     Route::get('/add-category', [CategoriesController::class, 'getFormAddCategory'])->name('add-category');
     Route::post('/add-category', [CategoriesController::class, 'postAddCategory'])->name('post-add-category');
