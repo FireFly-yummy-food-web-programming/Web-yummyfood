@@ -10,6 +10,13 @@ class Orders extends Model
 {
     use HasFactory;
     protected $table = 'orders';
+
+    public function isUserConstrained($userId)
+    {
+        $order = DB::table($this->table)->where('user_id', $userId)->first();
+        return !empty($order);
+    }
+
     public function getAllOrders()
     {
         $orderList = DB::table($this->table)
@@ -17,7 +24,19 @@ class Orders extends Model
             ->join('order_detail', 'order_detail.order_id', '=', 'orders.order_id')
             ->select('orders.*', 'users.Username', 'users.Email', 'order_detail.*')
             ->get();
-        // dd($dishList);
         return $orderList;
+    }
+    
+    public function getOrderStatusByUserId($userId)
+    {
+        $order = DB::table($this->table)
+            ->where('user_id', $userId)
+            ->first();
+
+        if ($order) {
+            return $order->status;
+        }
+
+        return null;
     }
 }

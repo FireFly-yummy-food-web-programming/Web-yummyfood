@@ -8,6 +8,7 @@ use App\Http\Controllers\LoginController;
 use App\Http\Controllers\Admin\DishController;
 use App\Http\Controllers\Admin\OrdersController;
 use App\Http\Controllers\Admin\CategoriesController;
+use App\Http\Controllers\Admin\UsersController;
 /*
 |--------------------------------------------------------------------------
 | Web Routes
@@ -38,6 +39,8 @@ Route::prefix('users')->name('users.')->group(function () {
 
 Route::prefix('admin')->group(function () {
     //Contacts
+    Route::get('/', [AdminController::class, 'getContacts'])->name('contact');
+    Route::post('/contacts/update-status', [AdminController::class, 'updateStatus'])->name('contacts.updateStatus');
     Route::get('/', [AdminController::class, 'getContacts'])->name('manage-contact');
     Route::get('/manage-categoties', [CategoriesController::class, 'getAllCategories'])->name('manage-categories');
     Route::get('/add-category', [CategoriesController::class, 'getFormAddCategory'])->name('add-category');
@@ -56,6 +59,14 @@ Route::prefix('admin')->group(function () {
     Route::post('/edit-dish/{id}', [DishController::class, 'postEditdish'])->name('post-edit-category');
 
 
-    // Route::get('/manage-users', [UsersController::class,'getContacts'])->name('manage-users');
+     Route::get('/manage-users', [UsersController::class,'getUsers'])->name('manage-users');
+     Route::get('/add-users', [UsersController::class, 'getFormAddUsers'])->name('add-users');
+     Route::post('/add-users', [UsersController::class, 'postAddUsers'])->name('post-add-users');
+     Route::post('/delete-users/{id}', [UsersController::class, 'deleteUsers'])->name('delete-users');
+     Route::post('/restore-users/{id}', [UsersController::class, 'restoreUsers'])->name('restore-users');
+     Route::get('/edit-users/{id}', [UsersController::class, 'getFormEditUsers'])->name('edit-users');
+     Route::post('/edit-users/{id}', [UsersController::class, 'postEditUsers'])->name('post-edit-users');
+
+
     // Route::get('/manage-banner', [BannerController::class,'getContacts'])->name('manage-banner');
 });
