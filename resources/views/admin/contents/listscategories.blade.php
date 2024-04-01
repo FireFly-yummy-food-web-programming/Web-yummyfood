@@ -53,7 +53,7 @@
               <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
             </div>
             <div class="modal-body">
-                <p>Are you sure you want to delete {{$category->category_name}} category?</p>
+                <p>Are you sure you want to delete this category?</p>
             </div>
             <div class="modal-footer">
               <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
@@ -74,7 +74,7 @@
               <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
             </div>
             <div class="modal-body">
-                <p>Are you sure you want to restore {{$category->category_name}} category?</p>
+                <p>Are you sure you want to restore this category?</p>
             </div>
             <div class="modal-footer">
               <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
@@ -85,50 +85,7 @@
       </div>
 </form>
 {{-- Trash listCategories --}}
-<h3>{{$title}}</h3>
-<table class="table table-bordered">
-    <thead>
-        <tr>
-            <th>Numerical</th>
-            <th>Name</th>
-            <th>Deleted_at</th>
-            <th>Action</th>
-        </tr>
-    </thead>
-    <tbody>
-        @if(!empty($listCategories))
-            @foreach($listCategories as $index => $category)
-                @if($category->deleted_at != NULL)
-                <tr colspan = "6">
-                    <td>{{$index+1}}</td>
-                    <td>{{$category->category_name}}</td>
-                    <td>{{$category->deleted_at}}</td>
-                    <td>
-                        <a href="{{route('edit-category',['id'=>$category->category_id])}}" class="btn btn-success btn-sm"><i class="fa-solid fa-pencil"></i></a>
-                        <button type="button" class="btn btn-light border-white bg-white" onclick="handleRestore({{$category->category_id}})">
-                            <a href="#" class="btn btn-success btn-sm">Restore</a>
-                        </button>
-                       
-                    </td>    
-                </tr>
-                @endif
-            @endforeach
-        @endif
-    </tbody>
-</table>
-  @section('js')
-        <script>
-            function handleDelete(id) {
-                var form = document.getElementById('deleteCategoryForm');
-                form.action = '/admin/delete-category/' + id;
-                $('#delete_category_modal').modal('show');
-                // console.log(form.action);
-            }
 
-            function handleRestore(id) {
-                var form = document.getElementById('restoreCategoryForm');
-                form.action = '/admin/restore-category/' + id;
-                $('#restore_category_modal').modal('show');
-            }
-        </script>
+  @section('js')
+            <script src="{{asset('assets/js/modaldelete.js')}}"></script>
   @endsection
