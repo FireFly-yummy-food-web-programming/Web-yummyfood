@@ -68,6 +68,7 @@ class Dish extends Model
     {
         $dish = $this->findOrFail($id);
         $dish->delete();
+        return $dish;
     }
     public function RestoreDish($id)
     {

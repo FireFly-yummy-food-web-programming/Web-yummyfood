@@ -5,6 +5,9 @@
         <p>Search: <input type="text" name="search" id="dashboar-search-input" class="search-bar" placeholder="Search..." style="font-size:16px;;"></p>
     </div>
 </div>
+@if(session("msg"))
+<div class="alert alert-danger">{{session('msg')}}</div>
+@endif
     <a href="{{route('add-dish')}}" class="btn btn-primary">Add</a>
     <table class="table table-bordered">
         <thead>
@@ -32,7 +35,7 @@
                     <td>{{$dish->price}}</td>
                     <td>
                         {{-- {{route('edit-dish',['id'=>$dish->dish_id])}} --}}
-                        <a href="{{route('edit-dish',['id'=>$dish->dish_id ])}}" class="btn btn-success btn-sm"><i class="fa-solid fa-pencil"></i></a>
+                        <a href="{{route('edit-dish',['id'=>$dish->dish_id])}}" class="btn btn-success btn-sm"><i class="fa-solid fa-pencil"></i></a>
                         <button type="button" class="btn btn-light border-white bg-white" onclick="handleDeleteDish({{$dish->dish_id}})">
                             <a href="#" class="btn btn-danger btn-sm"><i class="fa-solid fa-trash"></i></a>
                         </button>

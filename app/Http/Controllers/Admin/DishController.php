@@ -5,13 +5,17 @@ namespace App\Http\Controllers\Admin;
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use  App\Models\Dish;
+use App\Models\Orders;
+use App\Models\Order_detail;
 
 class DishController extends Controller
 {
     private $dishs;
+    private $order_detail;
     public function __construct()
     {
         $this->dishs = new Dish();
+        $this->order_detail = new Order_detail();
     }
     public function getDish(Request $request)
     {
@@ -123,26 +127,65 @@ class DishController extends Controller
         return back()->with('msg', 'Updated directory successfully');
     }
 
-
-
-
+    // public function deleteDish($id = 0)
+    // {
+    //     if (!empty($id)) {
+    //         $dishDetail = $this->dishs->getdishDetail($id);
+    //         if (!empty($dishDetail[0])) {
+    //             $isDishConstrained = $this->order_detail->isDishConstrained($id);
+    //             if ($isDishConstrained) {
+    //                 if ($isDishConstrained == 'Shipping orders') {
+    //                     $msg = "This item cannot be deleted because the order has been shipped";
+    //                 } else {
+    //                     $deleteDish = $this->dishs->deleteDish($id);
+    //                     if ($deleteDish) {
+    //                         $msg = "Delete Dish successfully";
+    //                     }
+    //                 }
+    //             } else {
+    //                 $deleteDish = $this->dishs->deleteDish($id);
+    //                     if ($deleteDish) {
+    //                         $msg = "Delete Dish successfully";
+    //                     }
+    //             }
+    //         } else {
+    //             $msg = 'Dish does not exist';
+    //         }
+    //     } else {
+    //         $msg = 'Link does not exist';
+    //     }
+    //     return redirect()->route('manage-dish')->with('msg', $msg);
+    // }
     public function deleteDish($id = 0)
     {
-
-        if (!empty($id)) {
-            $dishDetail = $this->dishs->getdishDetail($id);
-            if (!empty($dishDetail[0])) {
-                $deleteStatus = $this->dishs->deleteDish($id);
-                if ($deleteStatus) {
-                    $msg = "Delete dish successfully";
-                } else {
-                    $msg = "You cannot delete this dish";
-                }
+        if (empty($id)) {
+            $msg = 'Link does not exist';
+            return redirect()->route('manage-dish')->with('msg', $msg);
+        }
+        $dishDetail = $this->dishs->getdishDetail($id);
+        if (empty($dishDetail[0])) {
+            $msg = 'Dish does not exist';
+        }
+        $isDishConstrained = $this->order_detail->isDishConstrained($id);
+        if ($isDishConstrained) {
+            if ($isDishConstrained == 'Shipping orders') {
+                $msg = "This item cannot be deleted because the order has been shipped";
             } else {
-                $msg = 'dish does not exist';
+                $deleteDish = $this->dishs->deleteDish($id);
+                if ($deleteDish) {
+                    $msg = "Delete Dish successfully";
+                } else {
+                    $msg = "Error occurred while deleting Dish";
+                }
             }
         } else {
-            $msg = 'Link does not exist';
+            $deleteDish = $this->dishs->deleteDish($id);
+            // dd($deleteDish);
+            if ($deleteDish) {
+                $msg = "Delete Dish successfully";
+            } else {
+                $msg = "Error occurred while deleting Dish";
+            }
         }
         return redirect()->route('manage-dish')->with('msg', $msg);
     }

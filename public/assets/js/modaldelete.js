@@ -14,7 +14,7 @@ function handleDeleteDish(id) {
     var form = document.getElementById('deleteDishForm');
     form.action = '/admin/delete-dish/' + id;
     $('#delete_dish_modal').modal('show');
-    // console.log(form.action);
+    console.log(form.action);
     }
     
 function handleRestoreDish(id) {
