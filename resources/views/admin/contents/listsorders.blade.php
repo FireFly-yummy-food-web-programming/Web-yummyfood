@@ -36,7 +36,7 @@
                 <td>{{$order->phone}}</td>
                 <td>{{$order->address}}</td>
                 <td>{{$order->payment}}</td>
-                
+                {{$order->status}}
                 <td>
                     <select id="statusSelectorder">
                         <option value="active" id="status">{{$order->status}}</option>
