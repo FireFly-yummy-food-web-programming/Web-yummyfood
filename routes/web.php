@@ -9,6 +9,8 @@ use App\Http\Controllers\Admin\DishController;
 use App\Http\Controllers\Admin\OrdersController;
 use App\Http\Controllers\Admin\CategoriesController;
 use App\Http\Controllers\Admin\UsersController;
+use App\Models\Orders;
+
 /*
 |--------------------------------------------------------------------------
 | Web Routes
@@ -50,6 +52,7 @@ Route::prefix('admin')->group(function () {
     Route::get('/edit-category/{id}', [CategoriesController::class, 'getFormEditCategory'])->name('edit-category');
     Route::post('/edit-category/{id}', [CategoriesController::class, 'postEditCategory'])->name('post-edit-category');
     Route::get('/manage-oders', [OrdersController::class, 'getAllOrders'])->name('manage-orders');
+    Route::post('/order/update-status', [OrdersController::class, 'updateStatus'])->name('order.updateStatus');
     Route::get('/manage-dish', [DishController::class, 'getDish'])->name('manage-dish');
     Route::get('/add-dish', [DishController::class, 'getFormAdddish'])->name('add-dish');
     Route::post('/add-dish', [DishController::class, 'postAdddish'])->name('post-add-dish');

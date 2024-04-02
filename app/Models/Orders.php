@@ -5,6 +5,7 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Support\Facades\DB;
+// use  App\Models\Contacts;
 
 class Orders extends Model
 {
@@ -24,7 +25,7 @@ class Orders extends Model
             ->join('order_detail', 'order_detail.order_id', '=', 'orders.order_id')
             ->select('orders.*', 'users.Username', 'users.Email', 'order_detail.*')
             ->get();
-        dd($orderList);
+        // dd($orderList);
         return $orderList;
     }
 
@@ -39,5 +40,9 @@ class Orders extends Model
         }
 
         return null;
+    }
+    public function updateStatus($orderId, $newStatus)
+    {
+        Orders::where('order_id', $orderId)->update(['status' => $newStatus]);
     }
 }

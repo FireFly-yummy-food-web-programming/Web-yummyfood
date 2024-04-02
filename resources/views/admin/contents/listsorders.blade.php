@@ -38,29 +38,33 @@
                 <td>{{$order->payment}}</td>
                 {{$order->status}}
                 <td>
-                    <select id="statusSelectorder">
-                        <option value="active" id="status">{{$order->status}}</option>
-                            @if(($order->status == 'New order'))
-                                <option id="status-shipping-orders" value="Shipping orders">Shipping orders</option>
+                    <form action="{{route('order.updateStatus') }}" method="POST">
+                        <select id="statusSelectorder" name="status" onchange="this.form.submit()" >
+                            <option value="{{$order->status}}" id="status">{{$order->status}}</option>
+                                @if(($order->status == 'New order'))
+                                    <option id="status-shipping-orders" value="Shipping orders">Shipping orders</option>
+                                    <option id="status-delivered-orders" value="Delivered orders">Delivered orders</option>
+                                    <option id="status-canceled-orders" value="Canceled orders">Canceled orders</option>
+                                @endif
+                                @if(($order->status == 'Shipping orders'))
                                 <option id="status-delivered-orders" value="Delivered orders">Delivered orders</option>
                                 <option id="status-canceled-orders" value="Canceled orders">Canceled orders</option>
-                            @endif
-                            @if(($order->status == 'Shipping orders'))
-                            <option id="status-delivered-orders" value="Delivered orders">Delivered orders</option>
-                            <option id="status-canceled-orders" value="Canceled orders">Canceled orders</option>
-                            <option id="status-new-order" value="New order">New order</option>
-                            @endif
-                            @if(($order->status == 'Delivered orders'))
-                            <option id="status-shipping-orders" value="Shipping orders">Shipping orders</option>
-                            <option id="status-canceled-orders" value="Canceled orders">Canceled orders</option>
-                            <option id="status-new-order" value="New order">New order</option>
-                            @endif
-                            @if(($order->status == 'Canceled orders'))
-                            <option id="status-shipping-orders" value="Shipping orders">Shipping orders</option>
-                            <option id="status-delivered-orders" value="Delivered orders">Delivered orders</option>
-                            <option id="status-new-order" value="New order">New order</option>
-                            @endif
-                    </select>
+                                <option id="status-new-order" value="New order">New order</option>
+                                @endif
+                                @if(($order->status == 'Delivered orders'))
+                                <option id="status-shipping-orders" value="Shipping orders">Shipping orders</option>
+                                <option id="status-canceled-orders" value="Canceled orders">Canceled orders</option>
+                                <option id="status-new-order" value="New order">New order</option>
+                                @endif
+                                @if(($order->status == 'Canceled orders'))
+                                <option id="status-shipping-orders" value="Shipping orders">Shipping orders</option>
+                                <option id="status-delivered-orders" value="Delivered orders">Delivered orders</option>
+                                <option id="status-new-order" value="New order">New order</option>
+                                @endif
+                        </select>
+                        @csrf
+                        <input type="hidden" name="order_id" value="{{$order->order_id}}">
+                    </form>
                 </td>   
                 <td>{{$order->delivery_date}}</td>
             </tr>
