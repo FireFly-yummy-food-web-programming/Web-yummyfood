@@ -8,6 +8,8 @@ use App\Http\Controllers\LoginController;
 use App\Http\Controllers\Admin\DishController;
 use App\Http\Controllers\Admin\OrdersController;
 use App\Http\Controllers\Admin\CategoriesController;
+use App\Http\Controllers\Admin\BannersController;
+
 /*
 |--------------------------------------------------------------------------
 | Web Routes
@@ -54,7 +56,16 @@ Route::prefix('admin')->group(function () {
     Route::post('/restore-dish/{id}', [DishController::class, 'Restoredish'])->name('restore-dish');
     Route::get('/edit-dish/{id}', [DishController::class, 'getFormEditdish'])->name('edit-dish');
     Route::post('/edit-dish/{id}', [DishController::class, 'postEditdish'])->name('post-edit-category');
-    
+    Route::get('/manage-banners', [BannersController::class, 'index'])->name('manage-banners');
+    Route::get('/add-banner', [BannersController::class, 'create'])->name('add-banner');
+    Route::post('/add-banner', [BannersController::class, 'store'])->name('add-banner');
+    Route::get('/edit-banner/{id}', [BannersController::class, 'edit'])->name('edit-banner');
+    Route::post('/edit-banner/{id}', [BannersController::class, 'update'])->name('update-banner');
+    // Route::post('/delete-banner/{id}', [BannersController::class, 'destroy'])->name('delete-banner');
+    Route::post('/soft-delete-banner/{id}', [BannersController::class, 'softDelete'])->name('soft-delete-banner');
+    Route::get('/soft-delete-banner/{id}', [BannersController::class, 'softDelete'])->name('soft-delete-banner');
+    Route::post('/restore-banner/{id}', [BannersController::class, 'restore'])->name('restore-banner');
+    Route::post('/permanent-delete-banner/{id}', [BannersController::class, 'permanentDelete'])->name('permanent-delete-banner');
 
     // Route::get('/manage-users', [UsersController::class,'getContacts'])->name('manage-users');
     // Route::get('/manage-banner', [BannerController::class,'getContacts'])->name('manage-banner');
