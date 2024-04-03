@@ -19,4 +19,13 @@ class Contacts extends Model
             ->get();
         return $contacts;
     }
+    public function isContactConstrained($userId)
+    {
+        return $this->where('user_id', $userId)->exists();
+    }
+
+    public function getContactStatusByUserId($userId)
+    {
+        return $this->where('user_id', $userId)->value('status');
+    }
 }

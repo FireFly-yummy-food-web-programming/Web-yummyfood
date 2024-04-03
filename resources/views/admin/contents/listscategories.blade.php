@@ -85,6 +85,45 @@
       </div>
 </form>
 {{-- Trash listCategories --}}
+<h3>Trash</h3>
+<table class="table table-bordered">
+    <thead>
+        <tr>
+            <th>Numerical</th>
+            <th>Name</th>
+            <th>Deleted_at</th>
+            <th>Action</th>
+        </tr>
+    </thead>
+    <tbody>
+        @if(!empty($listCategories))
+            @foreach($listCategories as $index => $category)
+                @if($category->deleted_at != NULL)
+                <tr colspan = "6">
+                    <td>{{$index+1}}</td>
+                    <td>{{$category->category_name}}</td>
+                    <td>{{$category->deleted_at}}</td>
+                    <td>
+                        <a href="{{route('edit-category',['id'=>$category->category_id])}}" class="btn btn-success btn-sm"><i class="fa-solid fa-pencil"></i></a>
+                        <button type="button" class="btn btn-light border-white bg-white" onclick="handleRestore({{$category->category_id}})">
+                            <a href="#" class="btn btn-success btn-sm">Restore</a>
+                        </button>
+                       
+                    </td>    
+                </tr>
+                @endif
+            @endforeach
+        @endif
+    </tbody>
+</table>
+  @section('js')
+        <script>
+            function handleDelete(id) {
+                var form = document.getElementById('deleteCategoryForm');
+                form.action = '/admin/delete-category/' + id;
+                $('#delete_category_modal').modal('show');
+                // console.log(form.action);
+            }
 
   @section('js')
             <script src="{{asset('assets/js/modaldelete.js')}}"></script>
