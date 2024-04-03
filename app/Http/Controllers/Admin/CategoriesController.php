@@ -31,8 +31,9 @@ class CategoriesController extends Controller
         ], [
             'category_name.required' => 'Requires entering a category name',
         ]);
-
-        $dataInsert = $request->category_name; //category_name là tên name trong for
+        $dataInsert = [
+            'category_name' => $request->input('category_name')
+        ];
         $this->categories->addCategory($dataInsert);
         return redirect()->route('manage-categories')->with('msg', 'Added category successfully');
     }
@@ -69,7 +70,6 @@ class CategoriesController extends Controller
             if (!empty($categoryDetail[0])) {
                 $request->session()->put('category_id', $id);
                 $categoryDetail = $categoryDetail[0];
-                // dd(session('category_id'));
             } else {
                 return redirect()->route('manage-categories')->with('msg', 'This category does not exist');
             }
