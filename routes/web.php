@@ -10,8 +10,8 @@ use App\Http\Controllers\Admin\OrdersController;
 use App\Http\Controllers\Admin\CategoriesController;
 use App\Http\Controllers\Admin\BannersController;
 use App\Http\Controllers\Admin\UsersController;
+use App\Http\Controllers\Clients\ContactsController;
 use App\Models\Orders;
-
 /*
 |--------------------------------------------------------------------------
 | Web Routes
@@ -27,6 +27,9 @@ Route::get('/', function () {
     return view('layouts.clients');
 })->name('home');
 Route::prefix('users')->name('users.')->group(function () {
+    Route::get('/about', function () {
+        return view('About us page');
+    })->name('about');
     // Route::get('/contact', function () {
     //     return view('Contact');
     // })->name('contact');
@@ -38,6 +41,8 @@ Route::prefix('users')->name('users.')->group(function () {
     Route::get('/login', [LoginController::class, 'showLoginForm'])->name('login');
     Route::get('/logout', [LoginController::class, 'logout'])->name('logout');
     Route::post('/login', [LoginController::class, 'post'])->name('login.post');
+    Route::get('/contact', [ContactsController::class, 'showContactPage'])->name('contact');
+    Route::post('/contact', [ContactsController::class, 'submitContact'])->name('contact.submit');
 });
 
 Route::prefix('admin')->group(function () {
