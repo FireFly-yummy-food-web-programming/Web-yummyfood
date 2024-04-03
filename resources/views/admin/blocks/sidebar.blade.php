@@ -1,7 +1,7 @@
 <div class="sidebar position-fixed" style="padding: 20px">
     <div class="dashboard-sidebar-item">
         <i class="fa-solid fa-house" style="font-size: 25px; margin-right:8px;"></i>
-        <a href="{{route('contact')}}">Dashboard</a>
+        <a href="{{route('manage-contact')}}">Dashboard</a>
     </div>
     <div class="dashboard-sidebar-item">
         <i class="fa-solid fa-gear"  style="font-size: 25px; margin-right:8px;"></i>
@@ -12,7 +12,7 @@
             <li class="sidebar-item"><a href="{{route('manage-orders')}}">Orders</a></li>
             <li class="sidebar-item"><a href="{{route('manage-categories')}}">Categories</a></li>
             <li class="sidebar-item"><a href="{{route('manage-dish')}}">Dish</a></li>
-            {{-- <li class="sidebar-item"><a href="{{route('manage-banner')}}">Banner</a></li> --}}
+            <li class="sidebar-item"><a href="{{route('manage-banners')}}">Banner</a></li>
             {{-- <li class="sidebar-item"><a href="{{route('manage-users')}}">Users</a></li> --}}
         </ul>
     </div>
