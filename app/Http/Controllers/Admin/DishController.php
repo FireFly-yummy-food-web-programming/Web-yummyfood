@@ -24,6 +24,11 @@ class DishController extends Controller
         // dd($listDish);
         return view('admin.dashboard.dishs', compact('title', 'listDish'));
     }
+
+    public function getDetail($id)
+    {
+        $dish = Dish::findOrFail($id);
+        return view('clients.detail', compact('dish'));
     public function getFormAdddish()
     {
         $title = "Add new Dish";

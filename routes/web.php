@@ -41,6 +41,7 @@ Route::prefix('users')->name('users.')->group(function () {
     Route::get('/login', [LoginController::class, 'showLoginForm'])->name('login');
     Route::get('/logout', [LoginController::class, 'logout'])->name('logout');
     Route::post('/login', [LoginController::class, 'post'])->name('login.post');
+    Route::get('/dish/{id}', [DishController::class, 'getDetail']);
     Route::get('/contact', [ContactsController::class, 'showContactPage'])->name('contact');
     Route::post('/contact', [ContactsController::class, 'submitContact'])->name('contact.submit');
 });
