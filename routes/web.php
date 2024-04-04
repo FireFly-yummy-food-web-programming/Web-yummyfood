@@ -27,12 +27,6 @@ Route::get('/', function () {
     return view('layouts.clients');
 })->name('home');
 Route::prefix('users')->name('users.')->group(function () {
-    Route::get('/about', function () {
-        return view('About us page');
-    })->name('about');
-    // Route::get('/contact', function () {
-    //     return view('Contact');
-    // })->name('contact');
     // Route::get('/about', function () {
     //     return view('About us page');
     // })->name('about');

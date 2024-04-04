@@ -29,6 +29,7 @@ class DishController extends Controller
     {
         $dish = Dish::findOrFail($id);
         return view('clients.detail', compact('dish'));
+    }
     public function getFormAdddish()
     {
         $title = "Add new Dish";
@@ -131,36 +132,6 @@ class DishController extends Controller
         $this->dishs->EditDish($id, $dish);
         return back()->with('msg', 'Updated directory successfully');
     }
-
-    // public function deleteDish($id = 0)
-    // {
-    //     if (!empty($id)) {
-    //         $dishDetail = $this->dishs->getdishDetail($id);
-    //         if (!empty($dishDetail[0])) {
-    //             $isDishConstrained = $this->order_detail->isDishConstrained($id);
-    //             if ($isDishConstrained) {
-    //                 if ($isDishConstrained == 'Shipping orders') {
-    //                     $msg = "This item cannot be deleted because the order has been shipped";
-    //                 } else {
-    //                     $deleteDish = $this->dishs->deleteDish($id);
-    //                     if ($deleteDish) {
-    //                         $msg = "Delete Dish successfully";
-    //                     }
-    //                 }
-    //             } else {
-    //                 $deleteDish = $this->dishs->deleteDish($id);
-    //                     if ($deleteDish) {
-    //                         $msg = "Delete Dish successfully";
-    //                     }
-    //             }
-    //         } else {
-    //             $msg = 'Dish does not exist';
-    //         }
-    //     } else {
-    //         $msg = 'Link does not exist';
-    //     }
-    //     return redirect()->route('manage-dish')->with('msg', $msg);
-    // }
     public function deleteDish($id = 0)
     {
         if (empty($id)) {
