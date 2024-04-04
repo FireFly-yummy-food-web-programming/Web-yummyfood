@@ -25,7 +25,6 @@ class Orders extends Model
             ->join('order_detail', 'order_detail.order_id', '=', 'orders.order_id')
             ->select('orders.*', 'users.Username', 'users.Email', 'order_detail.*')
             ->get();
-        // dd($orderList);
         return $orderList;
     }
 

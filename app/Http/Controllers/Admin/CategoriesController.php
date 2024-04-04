@@ -17,7 +17,7 @@ class CategoriesController extends Controller
     {
         $title = 'List of Categories';
         $listCategories = $this->categories->getAllCategories();
-        return view('admin.dashboard.categories', compact('title', 'listCategories'));
+          return view('admin.dashboard.categories', compact('title', 'listCategories'));  
     }
     public function getFormAddCategory(Request $request)
     {

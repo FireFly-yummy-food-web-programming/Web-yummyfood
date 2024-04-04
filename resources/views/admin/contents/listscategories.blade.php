@@ -40,7 +40,6 @@
         </tbody>
     </table>
 </div>
-  
   <!-- Modal -->
 <form action="" method="POST" id="deleteCategoryForm">
     @csrf
@@ -117,14 +116,5 @@
     </tbody>
 </table>
   @section('js')
-        <script>
-            function handleDelete(id) {
-                var form = document.getElementById('deleteCategoryForm');
-                form.action = '/admin/delete-category/' + id;
-                $('#delete_category_modal').modal('show');
-                // console.log(form.action);
-            }
-
-  @section('js')
             <script src="{{asset('assets/js/modaldelete.js')}}"></script>
-  @endsection
+ @endsection

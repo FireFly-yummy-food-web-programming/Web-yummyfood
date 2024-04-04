@@ -36,7 +36,6 @@
                 <td>{{$order->phone}}</td>
                 <td>{{$order->address}}</td>
                 <td>{{$order->payment}}</td>
-                {{$order->status}}
                 <td>
                     <form action="{{route('order.updateStatus') }}" method="POST">
                         <select id="statusSelectorder" name="status" onchange="this.form.submit()" >
