@@ -19,4 +19,11 @@ class OrdersController extends Controller
         $listOrders = $this->orders->getAllOrders();
         return view('admin.dashboard.orders', compact('title', 'listOrders'));
     }
+    public function updateStatus(Request $request)
+    {
+        $ordertId = $request->input('order_id');
+        $newStatus = $request->input('status');
+        $this->orders->updateStatus($ordertId, $newStatus);
+        return redirect()->route('manage-orders');
+    }
 }

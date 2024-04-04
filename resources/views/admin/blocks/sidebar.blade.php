@@ -12,7 +12,7 @@
             <li class="sidebar-item"><a href="{{route('manage-orders')}}">Orders</a></li>
             <li class="sidebar-item"><a href="{{route('manage-categories')}}">Categories</a></li>
             <li class="sidebar-item"><a href="{{route('manage-dish')}}">Dish</a></li>
-            {{-- <li class="sidebar-item"><a href="{{route('manage-banner')}}">Banner</a></li> --}}
+            <li class="sidebar-item"><a href="{{route('manage-banners')}}">Banner</a></li>
             <li class="sidebar-item"><a href="{{route('manage-users')}}">Users</a></li>
         </ul>
     </div>

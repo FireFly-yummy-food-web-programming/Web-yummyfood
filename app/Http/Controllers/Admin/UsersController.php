@@ -6,15 +6,24 @@ use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use App\Models\Orders;
 use  App\Models\Users;
+use App\Models\Contacts;
+use App\Models\Cart;
+use App\Models\Favorite;
 
 class UsersController extends Controller
 {
     private $users;
     private $orders;
+    private $contacts;
+    private $cart;
+    private $favorite;
     public function __construct()
     {
         $this->users = new Users();
         $this->orders = new Orders(); 
+        $this->contacts = new Contacts(); 
+        $this->cart = new Cart();
+        $this->favorite = new Favorite();
 
     }
     public function getUsers(Request $request){
@@ -71,21 +80,20 @@ class UsersController extends Controller
     public function deleteUsers($id)
     {
         $user = $this->users->getUserById($id);
-    
+
         if (!empty($user)) {
-            // Kiểm tra xem người dùng có bị ràng buộc khóa ngoại trong bảng orders hay không
             $isUserConstrained = $this->orders->isUserConstrained($id);
-    
-            if ($isUserConstrained) {
-                // Lấy trạng thái của đơn hàng của người dùng
+            $isContactConstrained = $this->contacts->isContactConstrained($id);
+
+            if ($isUserConstrained || $isContactConstrained) {
                 $orderStatus = $this->orders->getOrderStatusByUserId($id);
-    
-                if ($orderStatus === 'New order' || $orderStatus === 'Shipping orders') {
-                    $msg = "Unable to delete this user. The user has pending orders.";
+                $contactStatus = $this->contacts->getContactStatusByUserId($id);
+
+             if ($orderStatus === 'New order' || $orderStatus === 'Shipping orders'  || $contactStatus === 'Pending') {
+                    $msg = "Unable to delete this user. The user has pending orders or unresponded contacts.";
                 } else {
-                    // Xóa mềm người dùng nếu trạng thái đơn hàng là 'Delivered orders' hoặc 'Canceled orders'
                     $deleteStatus = $this->users->softDeleteUser($id);
-    
+
                     if ($deleteStatus) {
                         $msg = "User deleted successfully";
                     } else {
@@ -93,9 +101,8 @@ class UsersController extends Controller
                     }
                 }
             } else {
-                // Xóa người dùng không có ràng buộc khóa ngoại
                 $deleteStatus = $this->users->deleteUsers($id);
-    
+
                 if ($deleteStatus) {
                     $msg = "User deleted successfully";
                 } else {
@@ -105,11 +112,10 @@ class UsersController extends Controller
         } else {
             $msg = 'User does not exist';
         }
-    
-        // Lấy lại danh sách người dùng sau khi xóa mềm và trả về view
+
         $listUsers = $this->users->getAllUsers();
         return redirect()->route('manage-users')->with(['msg' => $msg, 'listUsers' => $listUsers]);
-    }    
+    } 
     public function getFormEditUsers(Request $request, $id)
     {
         $title = "Edit User";
