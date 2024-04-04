@@ -9,6 +9,7 @@ use App\Http\Controllers\Admin\DishController;
 use App\Http\Controllers\Admin\OrdersController;
 use App\Http\Controllers\Admin\CategoriesController;
 use App\Http\Controllers\Admin\UsersController;
+use App\Http\Controllers\Clients\CartController;
 /*
 |--------------------------------------------------------------------------
 | Web Routes
@@ -35,6 +36,9 @@ Route::prefix('users')->name('users.')->group(function () {
     Route::get('/login', [LoginController::class, 'showLoginForm'])->name('login');
     Route::get('/logout', [LoginController::class, 'logout'])->name('logout');
     Route::post('/login', [LoginController::class, 'post'])->name('login.post');
+    Route::middleware(['auth'])->group(function () {
+        Route::post('/add-to-cart/{id}', [CartController::class, 'addToCart'])->name('cart.add');
+    });
 });
 
 Route::prefix('admin')->group(function () {
