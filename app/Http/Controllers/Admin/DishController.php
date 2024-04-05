@@ -30,6 +30,7 @@ class DishController extends Controller
         $dish = Dish::findOrFail($id);
         return view('clients.detail', compact('dish'));
     }
+    
     public function getFormAdddish()
     {
         $title = "Add new Dish";
@@ -125,7 +126,7 @@ class DishController extends Controller
     }
 
     $this->dishs->EditDish($id, $dish);
-    return back()->with('msg', 'Updated directory successfully');
+    return  redirect()->route('manage-dish')->with('msg', 'Updated directory successfully');
 }
 
     public function deleteDish($id = 0)

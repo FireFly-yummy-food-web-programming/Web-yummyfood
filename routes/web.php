@@ -44,7 +44,6 @@ Route::prefix('users')->name('users.')->group(function () {
 
 Route::prefix('admin')->group(function () {
     //Contacts
-    Route::get('/', [AdminController::class, 'getContacts'])->name('contact');
     Route::post('/contacts/update-status', [AdminController::class, 'updateStatus'])->name('contacts.updateStatus');
     Route::get('/', [AdminController::class, 'getContacts'])->name('manage-contact');
     Route::get('/manage-categoties', [CategoriesController::class, 'getAllCategories'])->name('manage-categories');
