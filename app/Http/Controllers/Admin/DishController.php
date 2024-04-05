@@ -30,6 +30,7 @@ class DishController extends Controller
         $dish = Dish::findOrFail($id);
         return view('clients.detail', compact('dish'));
     }
+    
     public function getFormAdddish()
     {
         $title = "Add new Dish";
@@ -93,45 +94,41 @@ class DishController extends Controller
         return view('admin.dish.edit', compact('title', 'dishDetail', 'listCategories'));
     }
     public function postEditdish(Request $request)
-    {
-        $id = session('dish_id');
-        $oldImage = $this->dishs->getImage($id);
-        if (empty($id)) { {
-                return back()->with('msg', 'Link does not exist');
-            }
-        }
-        $request->validate([
-            'dish_name' => 'required|unique:dish,dish_name',
-            'category_id' => 'required',
-            'image_dish' => 'image|mimes:jpeg,png,jpg,gif|max:2048',
-            'price' => 'required|numeric',
-            'detail' => 'required',
-        ], [
-            'dish_name.required' => 'Requires entering a dish name',
-            'category_id.required' => 'Requires entering a category name',
-            'image_dish.image' => 'The file is not in the correct format',
-            'image_dish.mimes' => 'The file is not in the correct',
-            'price.required' => 'Requires entering a dish price',
-            'price.numeric' => 'Invalid price',
-            'detail.required' => 'Requires entering a dish detail',
-        ]);
-        $dish = [
-            'dish_name' =>  $request->input('dish_name'),
-            'category_id' => $request->input('category_id'),
-            'price' => $request->input('price'),
-            'detail' => $request->input('detail'),
-        ];
-        if ($request->hasFile('image_dish')) {
-            $imageName = $request->file('image_dish') . '.' . $request->image->extension();
-            $request->file('image')->storeAs('images', $imageName, 'public');
-            $dish['image_dish'] = $imageName;
-        } else {
-            $dish['image_dish'] = $oldImage->image_dish;
-        }
-        // dd($dish);
-        $this->dishs->EditDish($id, $dish);
-        return back()->with('msg', 'Updated directory successfully');
+{
+    $id = session('dish_id');
+    $oldImage = $this->dishs->getImage($id);
+    if (empty($id) || $oldImage === null) {
+        return back()->with('msg', 'Link does not exist or old image not found');
     }
+
+    $request->validate([
+        'image_dish' => 'image|mimes:jpeg,png,jpg,gif|max:2048',
+        'price' => 'numeric',
+    ],[
+        'image_dish.image' => 'The file is not in the correct format',
+        'image_dish.mimes' => 'The file is not in the correct format',
+        'price.numeric' => 'Invalid price',
+    ]);
+    $dish = [
+        'dish_name' =>  $request->input('dish_name'),
+        'category_id' => $request->input('category_id'),
+        'price' => $request->input('price'),
+        'detail' => $request->input('detail'),
+    ];
+
+    if ($request->hasFile('image_dish')) {
+        $imageName = $request->file('image_dish')->getClientOriginalName(); // Lấy tên gốc của file
+        $imageName = time() . '_' . $imageName; // Thêm timestamp để tránh trùng tên
+        $request->file('image_dish')->storeAs('images', $imageName, 'public');
+        $dish['image_dish'] = $imageName;
+    } else {
+        $dish['image_dish'] = $oldImage->image_dish;
+    }
+
+    $this->dishs->EditDish($id, $dish);
+    return  redirect()->route('manage-dish')->with('msg', 'Updated directory successfully');
+}
+
     public function deleteDish($id = 0)
     {
         if (empty($id)) {

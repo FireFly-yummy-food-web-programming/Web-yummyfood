@@ -16,8 +16,8 @@
 <body>
     @include('clients.blocks.header')
     {{-- @include('components.logo') --}}
-    <main class="py-5">
-        <div class="container">
+    <main class="">
+        <div class="container-fluid">
             <div class="row">
                 <div class="content">
                     @yield('content')

@@ -5,6 +5,7 @@ use App\Http\Controllers\Admin\AdminController;
 use App\Http\Controllers\Clients\UserController;
 use App\Http\Controllers\Auth\RegisterController;
 use App\Http\Controllers\LoginController;
+use App\Http\Controllers\HomeController;
 use App\Http\Controllers\Admin\DishController;
 use App\Http\Controllers\Admin\OrdersController;
 use App\Http\Controllers\Admin\CategoriesController;
@@ -23,9 +24,10 @@ use App\Models\Orders;
 |
 */
 
-Route::get('/', function () {
-    return view('layouts.clients');
-})->name('home');
+// Route::get('/', function () {
+//     return view('clients.home');
+// })->name('home');
+Route::get('/', [HomeController::class, 'index'])->name('home');
 Route::prefix('users')->name('users.')->group(function () {
     // Route::get('/about', function () {
     //     return view('About us page');
@@ -35,14 +37,13 @@ Route::prefix('users')->name('users.')->group(function () {
     Route::get('/login', [LoginController::class, 'showLoginForm'])->name('login');
     Route::get('/logout', [LoginController::class, 'logout'])->name('logout');
     Route::post('/login', [LoginController::class, 'post'])->name('login.post');
-    Route::get('/dish/{id}', [DishController::class, 'getDetail']);
+    Route::get('/dish/{id}', [DishController::class, 'getDetail'])->name('dish');
     Route::get('/contact', [ContactsController::class, 'showContactPage'])->name('contact');
     Route::post('/contact', [ContactsController::class, 'submitContact'])->name('contact.submit');
 });
 
 Route::prefix('admin')->group(function () {
     //Contacts
-    Route::get('/', [AdminController::class, 'getContacts'])->name('contact');
     Route::post('/contacts/update-status', [AdminController::class, 'updateStatus'])->name('contacts.updateStatus');
     Route::get('/', [AdminController::class, 'getContacts'])->name('manage-contact');
     Route::get('/manage-categoties', [CategoriesController::class, 'getAllCategories'])->name('manage-categories');
