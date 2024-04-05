@@ -9,7 +9,7 @@
             <div>
                 <div class="image_dish">
                     <div class="col-lg-6 col-md-12 col-sm-12">
-                      <img src="{{ $dish->image_dish }}" width="100%" id="product-img">
+                      <img src="/storage/images/{{$dish->image_dish}}" width="100%" id="product-img">
                     </div>
 
                     <div class="col-lg-6 col-md-12 col-sm-12">
