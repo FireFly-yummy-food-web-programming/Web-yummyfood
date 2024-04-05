@@ -46,12 +46,12 @@
                     <form action="{{ route('contacts.updateStatus') }}" method="POST">
                         <td>
                             <select name="status" onchange="this.form.submit()">
-                                <option value="active" id="status">{{$contact->status}}</option>
+                                <option value="{{$contact->status}}" id="status">{{$contact->status}}</option>
                                 @if(($contact->status == 'Pending'))
                                     <option id="status-processed" value="Processed">Processed</option>
                                 @endif
                                 @if(($contact->status == 'Processed'))
-                                    <option id="status-pending" value="pending">Pending</option>
+                                    <option id="status-pending" value="Pending">Pending</option>
                                 @endif
                             </select>
                             @csrf

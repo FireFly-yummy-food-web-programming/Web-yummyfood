@@ -47,7 +47,7 @@
               <a class="nav-link active users-navbar-contactus" aria-current="page" href="{{route('users.contact')}}" style="padding-top: 50px;">Contact us</a>
             </li>
             <li class="nav-item">
-                <a class="nav-link active users-navbar-contactus" aria-current="page" href="{{route('users.about')}}" style="padding-top: 50px;">About us</a>
+                <a class="nav-link active users-navbar-contactus" aria-current="page" href="#" style="padding-top: 50px;">About us</a>
             </li>
             <li class="nav-item">
                 <a class="nav-link active users-navbar-contactus" aria-current="page" href="{{route('users.login')}}" style="padding-top: 50px;">Log in</a>

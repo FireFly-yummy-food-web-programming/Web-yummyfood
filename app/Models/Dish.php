@@ -11,6 +11,7 @@ class Dish extends Model
     use HasFactory;
     protected $table = 'dish';
     protected $primaryKey = 'dish_id';
+    protected $fillable = ['category_id', 'image_dish', 'dish_name', 'details', 'price'];
     public function getAllDish()
     {
         $dishList = DB::table($this->table)
