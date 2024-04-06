@@ -36,7 +36,7 @@ class RegisterController extends Controller
         $user->Name = $request->name;
         $user->Phone = $request->phone;
         $user->Email = $request->email;
-        $user->role = 'customer';
+        // $user->role = 'customer';
         $user->save();
 
         // Redirect to login page or any other page

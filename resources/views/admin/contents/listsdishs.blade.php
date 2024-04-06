@@ -6,7 +6,7 @@
     </div>
 </div>
 @if(session("msg"))
-<div class="alert alert-danger">{{session('msg')}}</div>
+<div class="alert alert-success">{{session('msg')}}</div>
 @endif
     <a href="{{route('add-dish')}}" class="btn btn-primary">Add</a>
     <table class="table table-bordered">
