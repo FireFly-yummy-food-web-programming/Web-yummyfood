@@ -40,7 +40,7 @@ class LoginController extends Controller
                     $request->session()->put('user_id', $user->user_id);
                     $request->session()->put('logged_in', true);
 
-                    return redirect()->route('admin.dashboard.dashboard');
+                    return redirect()->route('manage-contact');
                 } elseif ($user->role === 'customer') {
                     // Lưu thông tin người dùng vào session
                     $request->session()->put('user_id', $user->user_id);

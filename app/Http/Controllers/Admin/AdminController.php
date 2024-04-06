@@ -30,6 +30,6 @@ class AdminController extends Controller
     Contacts::where('contact_id', $contactId)->update(['status' => $newStatus]);
 
     // Chuyển hướng về trang danh sách liên hệ
-    return redirect()->route('contact');
+    return back();
 }
 }
