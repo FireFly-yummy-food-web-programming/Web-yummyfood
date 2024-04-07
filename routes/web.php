@@ -36,10 +36,13 @@ Route::prefix('users')->name('users.')->group(function () {
     Route::get('/login', [LoginController::class, 'showLoginForm'])->name('login');
     Route::get('/logout', [LoginController::class, 'logout'])->name('logout');
     Route::post('/login', [LoginController::class, 'post'])->name('login.post');
-    Route::middleware(['auth'])->group(function () {
-        Route::post('/add-to-cart/{id}', [CartController::class, 'addToCart'])->name('cart.add');
+    Route::group(['middleware' => 'auth'], function () {
+        Route::post('/add-to-cart/{id}', [CartController::class, 'addToCart'])->name('add-to-cart');
+        Route::get('/cart', [CartController::class, 'viewCart'])->name('view-cart');
+        Route::put('/cart/{id}', [CartController::class, 'updateCart'])->name('update-cart');
     });
-    Route::get('/dish/{id}', [DishController::class, 'getDetail']);
+    Route::delete('/cart/remove/{id}', [CartController::class, 'removeFromCart'])->name('remove-from-cart');
+    Route::get('/detail/{id}', [DishController::class, 'getDetail']);
     Route::get('/contact', [ContactsController::class, 'showContactPage'])->name('contact');
     Route::post('/contact', [ContactsController::class, 'submitContact'])->name('contact.submit');
 });

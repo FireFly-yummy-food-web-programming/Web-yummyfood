@@ -9,5 +9,15 @@ use Illuminate\Support\Facades\DB;
 class Cart extends Model
 {
     use HasFactory;
-    protected $table = 'cart';
+    protected $fillable = ['dish_id', 'user_id', 'quantity'];
+
+    public function dish()
+    {
+        return $this->belongsTo(Dish::class);
+    }
+
+    public function user()
+    {
+        return $this->belongsTo(User::class);
+    }
 }

@@ -26,7 +26,11 @@
                             <p class="review">100 reviews</p>
                             <h2 class="price">{{ $dish->price }}</h2>
                             <p class="details">{{ $dish->details }}</p>
-                            <input type="submit" id="add-to-cart" value="Add to cart">
+                            {{-- <input type="submit" id="add-to-cart" value="Add to cart"> --}}
+                            <form action="{{ route('users.add-to-cart', ['id' => $dish->dish_id]) }}" method="POST">
+                                @csrf
+                                <button type="submit">Add to cart</button>
+                            </form>
                         </div>
                     </div>
                 </div>

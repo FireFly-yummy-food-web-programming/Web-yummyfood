@@ -11,7 +11,7 @@ class AuthenticateMiddleware
     public function handle(Request $request, Closure $next)
     {
         if (!Auth::check()) {
-            return redirect()->route('login')->with('error', 'Bạn cần đăng nhập để thực hiện chức năng này.');
+            return redirect()->route('users.login')->with('error', 'Bạn cần đăng nhập để thực hiện chức năng này.');
         }
 
         return $next($request);
