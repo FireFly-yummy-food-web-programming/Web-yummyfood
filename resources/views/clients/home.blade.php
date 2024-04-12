@@ -65,11 +65,15 @@
             <div class="name-price">
               <h5 class="card-title">{{$value->dish_name}}</h5>
               <h6 style="color: red">${{$value->price}}</h6>
-
-              <h5 id="iconContainer" onclick="toggleIcon(this)" data-icon="{{$value->dish_id}}">
-                  <i id="icon" class="fa-regular fa-heart"></i>
-              </h5>
-
+                {{-- <h5 id="iconContainer" onclick="toggleIcon(this)" data-icon="{{$value->dish_id}}">
+                    <i id="icon" class="fa-regular fa-heart"></i>
+                </h5> --}}
+                  <h5 id="iconContainer"data-icon="{{$value->dish_id}}">
+                    <a href="{{(session()->get('logged_in'))?route('users.favorites.add', ['id' => $value->dish_id]) : route('users.login')}}">
+                      {{-- <i id="icon_favorite" class="fa-regular fa-heart"></i> --}}
+                      <i  id="icon_favorite" class="{{($isFavoritedDish)?'fas':'far'}} fa-heart"></i>
+                    </a>
+                </h5>
             </div>
             <div>
               <a href="#" style="margin-right: 56px; display: inline-block; width: 125px;" class="btn btn-primary">Detail</a> 
@@ -147,11 +151,13 @@ chevron_left
             <div class="name-price">
               <h5 class="card-title">{{$value->dish_name}}</h5>
               <h6 style="color: red">${{$value->price}}</h6>
-
+{{-- 
               <h5 id="iconContainer" onclick="toggleIcon(this)" data-icon="{{$value->dish_id}}">
                   <i id="icon" class="fa-regular fa-heart"></i>
-              </h5>
-
+              </h5> --}}
+              <h5 id="iconContainer"data-icon="{{$value->dish_id}}">
+                <i id="icon" class="fa-regular fa-heart"></i>
+            </h5>
             </div>
             <div>
               <a href="#" style="margin-right: 56px; display: inline-block; width: 125px;" class="btn btn-primary">Detail</a> 
