@@ -14,15 +14,29 @@ class FavoriteController extends Controller
     {
         $this->favorite = new Favorite();
     }
-    public function addToFavorites(Request $request)
+
+    public function addToFavorite(Request $request, $id)
     {
         $user_id = $request->session()->get('user_id');
         $dish_id = $request->id;
-        $data = [
-            'user_id' => $user_id,
-            'dish_id' => $dish_id,
-        ];
-        $this->favorite->add($data);
-        return back();
-    }        
+        $isFavorite = Favorite::where('user_id', $user_id)->where('dish_id', $dish_id)->first();
+        if ($isFavorite) {
+            $isFavorite->delete();
+            return redirect()->route('home')->with('isFavorite');
+        } else {
+            $data = [
+                'user_id' => $user_id,
+                'dish_id' => $dish_id,
+            ];
+            $favorites = $this->favorite->addFavorite($data);
+            return redirect()->route('home')->with('isFavorite');
+        }
+    } 
+
+    public function getAllFavoriteOfUser(Request $request){
+        $user_id = $request->session()->get('user_id');
+        $listDish = $this->favorite->listFavorite($user_id);
+        // dd($listDish);
+        return view('clients.listFavorite', compact('listDish'));
+    }
 }

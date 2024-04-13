@@ -3,7 +3,6 @@
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\Admin\AdminController;
 use App\Http\Controllers\Clients\UserController;
-use App\Http\Controllers\Clients\FavoriteController;
 use App\Http\Controllers\Auth\RegisterController;
 use App\Http\Controllers\LoginController;
 use App\Http\Controllers\HomeController;
@@ -13,7 +12,7 @@ use App\Http\Controllers\Admin\CategoriesController;
 use App\Http\Controllers\Admin\BannersController;
 use App\Http\Controllers\Admin\UsersController;
 use App\Http\Controllers\Clients\ContactsController;
-use App\Models\Orders;
+use App\Http\Controllers\Clients\FavoriteController;
 /*
 |--------------------------------------------------------------------------
 | Web Routes
@@ -41,8 +40,8 @@ Route::prefix('users')->name('users.')->group(function () {
     Route::get('/dish/{id}', [DishController::class, 'getDetail'])->name('dish');
     Route::get('/contact', [ContactsController::class, 'showContactPage'])->name('contact');
     Route::post('/contact', [ContactsController::class, 'submitContact'])->name('contact.submit');
-    Route::get('/favorites/add{id}', [FavoriteController::class, 'addToFavorites'])->name('favorites.add');  
-    // Route::get('/favorites/add/{id}', [FavoriteController::class, 'isFavoriteDish'])->name('favorites.add');
+    Route::get('/favorites/add/{id}', [FavoriteController::class, 'addToFavorite'])->name('favorites.add'); 
+    Route::get('/listFavorites', [FavoriteController::class, 'getAllFavoriteOfUser'])->name('list-favorites');   
 
 });
 

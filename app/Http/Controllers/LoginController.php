@@ -68,6 +68,6 @@ class LoginController extends Controller
     // Đăng xuất người dùng
     Auth::logout();
 
-    return view('clients.home');
+    return redirect(route('home'));
 }
 }
