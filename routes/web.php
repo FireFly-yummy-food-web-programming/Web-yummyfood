@@ -12,7 +12,7 @@ use App\Http\Controllers\Admin\CategoriesController;
 use App\Http\Controllers\Admin\BannersController;
 use App\Http\Controllers\Admin\UsersController;
 use App\Http\Controllers\Clients\ContactsController;
-use App\Models\Orders;
+use App\Http\Controllers\Clients\FavoriteController;
 /*
 |--------------------------------------------------------------------------
 | Web Routes
@@ -24,14 +24,8 @@ use App\Models\Orders;
 |
 */
 
-// Route::get('/', function () {
-//     return view('clients.home');
-// })->name('home');
 Route::get('/', [HomeController::class, 'index'])->name('home');
 Route::prefix('users')->name('users.')->group(function () {
-    // Route::get('/about', function () {
-    //     return view('About us page');
-    // })->name('about');
     Route::get('/register', [RegisterController::class, 'getRegister']);
     Route::post('/register', [RegisterController::class, 'postRegister'])->name('register');
     Route::get('/login', [LoginController::class, 'showLoginForm'])->name('login');
@@ -40,20 +34,23 @@ Route::prefix('users')->name('users.')->group(function () {
     Route::get('/dish/{id}', [DishController::class, 'getDetail'])->name('dish');
     Route::get('/contact', [ContactsController::class, 'showContactPage'])->name('contact');
     Route::post('/contact', [ContactsController::class, 'submitContact'])->name('contact.submit');
+    Route::get('/favorites/add/{id}', [FavoriteController::class, 'addToFavorite'])->name('favorites.add'); 
+    Route::get('/listFavorites', [FavoriteController::class, 'getAllFavoriteOfUser'])->name('list-favorites');   
+
 });
 
 Route::prefix('admin')->group(function () {
     //Contacts
     Route::post('/contacts/update-status', [AdminController::class, 'updateStatus'])->name('contacts.updateStatus');
     Route::get('/', [AdminController::class, 'getContacts'])->name('manage-contact');
-    Route::get('/manage-categoties', [CategoriesController::class, 'getAllCategories'])->name('manage-categories');
+    Route::get('/manage-category', [CategoriesController::class, 'getAllCategories'])->name('manage-categories');
     Route::get('/add-category', [CategoriesController::class, 'getFormAddCategory'])->name('add-category');
     Route::post('/add-category', [CategoriesController::class, 'postAddCategory'])->name('post-add-category');
     Route::post('/delete-category/{id}', [CategoriesController::class, 'deleteCategory'])->name('delete-category');
     Route::post('/restore-category/{id}', [CategoriesController::class, 'RestoreCategory'])->name('restore-category');
     Route::get('/edit-category/{id}', [CategoriesController::class, 'getFormEditCategory'])->name('edit-category');
     Route::post('/edit-category/{id}', [CategoriesController::class, 'postEditCategory'])->name('post-edit-category');
-    Route::get('/manage-oders', [OrdersController::class, 'getAllOrders'])->name('manage-orders');
+    Route::get('/manage-orders', [OrdersController::class, 'getAllOrders'])->name('manage-orders');
     Route::post('/order/update-status', [OrdersController::class, 'updateStatus'])->name('order.updateStatus');
     Route::get('/manage-dish', [DishController::class, 'getDish'])->name('manage-dish');
     Route::get('/add-dish', [DishController::class, 'getFormAdddish'])->name('add-dish');

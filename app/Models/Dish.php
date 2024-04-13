@@ -12,6 +12,10 @@ class Dish extends Model
     protected $table = 'dish';
     protected $primaryKey = 'dish_id';
     protected $fillable = ['category_id', 'image_dish', 'dish_name', 'details', 'price'];
+    public function favorite(): HasMany
+    {
+        return $this->hasMany(Favorite::class, 'dish_id', 'dish_id');
+    }
     public function getAllDish()
     {
         $dishList = DB::table($this->table)

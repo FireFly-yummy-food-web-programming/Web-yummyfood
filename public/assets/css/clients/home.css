@@ -372,4 +372,11 @@
     }
   }
 
+  .icon_favorite{
+    color: red;
+  }
+  .favorite_icon{
+    border: none;
+    background-color: rgba(0, 0, 0, 0);
+  }
   /* end css slider recomment */

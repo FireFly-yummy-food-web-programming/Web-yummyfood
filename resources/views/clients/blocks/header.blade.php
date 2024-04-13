@@ -65,7 +65,7 @@
                 </h5>
                 <ul class="dropdown-menu" aria-labelledby="userDropdown">
                     <li><a class="dropdown-item" href="{{route('users.logout') }}">Logout</a></li>
-                    <li><a class="dropdown-item" href="">Favorite</a></li>
+                    <li><a class="dropdown-item" href="{{route('users.list-favorites')}}">Favorite</a></li>
                 </ul>
             </li>
             @endif
