@@ -17,7 +17,16 @@
         align-items: center;
         gap: 40px;
 }
-
+.corner-badge {
+  position: absolute; /* Tạo vị trí tuyệt đối để căn chỉnh */
+  top: 0; /* Đặt vị trí bên trên cùng */
+  left: 0; /* Đặt vị trí bên trái */
+  margin: 10px; /* Khoảng cách từ viền */
+  padding: 5px 10px; /* Khoảng cách bên trong thẻ */
+  background-color: #FF0000; /* Màu nền */
+  color: #FFFFFF; /* Màu chữ */
+  font-size: 20px; /* Kích thước chữ */
+}
 .header .heading{
   /* color: #000; */
     width: 725px;
