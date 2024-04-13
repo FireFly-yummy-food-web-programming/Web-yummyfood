@@ -14,14 +14,8 @@ class HomeController extends Controller
         $allDish = DB::table('dish')->get();
         $listRandom =DB::table('dish')->inRandomOrder()->limit(10)->get();
         // dd($listDish);
-        return view('clients.home',compact('listDish','allDish','listRandom'));
+        $listRandomPromotion = DB::table('dish')->where('discount', '>', 1)->inRandomOrder()->limit(10)->get();
+        return view('clients.home', compact('listDish', 'allDish', 'listRandom', 'listRandomPromotion'));
     }
-
-    // public function sliderFood(){
-    //     foreach
-    // }
-
-    
-
 
 }
