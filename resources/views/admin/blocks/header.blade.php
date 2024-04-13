@@ -38,13 +38,16 @@
                     placeholder="Search...">
             </div> --}}
         </div>
-        <div class="d-flex">
-            <img src="{{asset('assets/images/avatar-admin.jpg')}}" alt="Avatar of admin" id="dashboar-avatar">
-        </div>
         <div>
-            <button class="dashboar-button-logout"  style="background-color: rgba(255, 255, 255, 0)">
-                <i class="fa fa-sign-out dashboar-logout-icon"></i>
+            <button class="dashboar-button-logout" style="background-color: rgba(255, 255, 255, 0)" onclick="redirectToHome()">
+              <i class="fa fa-sign-out dashboar-logout-icon"></i>
             </button>
-        </div>
+          </div>
+          
+          <script>
+            function redirectToHome() {
+              window.location.href = "{{ route('home') }}";
+            }
+          </script>
     </nav>
 </header>

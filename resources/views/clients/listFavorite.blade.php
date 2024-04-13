@@ -25,7 +25,6 @@
                                 <a
                                     href="{{ session()->get('logged_in') ? route('users.favorites.add', ['id' => $value->dish_id]) : route('users.login') }}">
                                     <i class="icon_favorite fa-solid fa-heart"></i>
-                                    {{-- <i  id="icon_favorite" class="{{($isFavoritedDish)?'fas':'far'}} fa-heart"></i> --}}
                                 </a>
                             </h5>
                         </div>

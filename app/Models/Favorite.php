@@ -39,7 +39,6 @@ class Favorite extends Model
                         ->where('user_id', $user_id)
                         ->where('dish_id', $dish_id)
                         ->exists();
-    
         return $isFavorite;
     }
 }   

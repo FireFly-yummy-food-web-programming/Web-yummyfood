@@ -49,7 +49,7 @@
         </div>
     </div>
 
-
+{{-- RECOMENT --}}
     <div class="container">
         <h2 style="text-align: center; margin:20px;">Recommended products</h2>
         <div class="slider-wrapper">
@@ -70,7 +70,6 @@
                                     <a
                                         href="{{ session()->get('logged_in') ? route('users.favorites.add', ['id' => $value->dish_id]) : route('users.login') }}">
                                         <i class="icon_favorite fa-regular fa-heart"></i>
-                                        {{-- <i  id="icon_favorite" class="{{($isFavoritedDish)?'fas':'far'}} fa-heart"></i> --}}
                                     </a>
                                 </h5>
                             </div>
@@ -83,9 +82,9 @@
                     </li>
                 @endforeach
             </ul>
-                <button id="next-slide" class="slide-button material-symbols-rounded">
-                    chevron_right
-                </button>
+            <button id="next-slide" class="slide-button material-symbols-rounded">
+                chevron_right
+            </button>
         </div>
         <div class="slider-scrollbar">
             <div class="scrollbar-track">
@@ -93,8 +92,6 @@
             </div>
         </div>
     </div>
-
-
     <div class="container">
         <h2 style="text-align: center; margin:20px;">Promotional products</h2>
         <div class="slider-wrapper">
@@ -102,23 +99,65 @@
                 chevron_left
             </button>
             <ul class="image-list">
-                @foreach ($listRandom as $value)
+                @foreach ($listRandomPromotion as $value)
                     <li class="card" style="width: 20rem;">
-                        <a href="#"><img src="/storage/images/{{ $value->image_dish }}" class="card-img-top"
-                                alt="..." height="600px"></a>
+                        <a href="{{ route('users.dish', ['id' => $value->dish_id]) }}"><img
+                                src="/storage/images/{{ $value->image_dish }}" class="card-img-top" alt="..."
+                                height="600px"></a>
+                        <div class="card-body">
+                            <div class="name-price">
+                                <h5 class="card-title">{{ $value->dish_name }}</h5>
+                                <h6 style="color: red"><del>${{ $value->price }}</del>
+                                    ${{ number_format($value->price * (1 - $value->discount / 100), 2) }}</h6>
+                                    <h5 id="iconContainer"onclick="toggleIcon(this)" data-icon="{{ $value->dish_id }}">
+                                        <a
+                                            href="{{ session()->get('logged_in') ? route('users.favorites.add', ['id' => $value->dish_id]) : route('users.login') }}">
+                                            <i class="icon_favorite fa-regular fa-heart"></i>
+                                        </a>
+                                    </h5>
+                                @if ($value->discount > 1)
+                                    <h1 class="corner-badge">{{ $value->discount }}%</h1>
+                                @endif
+                            </div>
+                            <div>
+                                <a href="#" style="margin-right: 56px; display: inline-block; width: 125px;"
+                                    class="btn btn-primary">Detail</a>
+                                <a href="#" class="btn btn-danger">Add to cart</a>
+                            </div>
+                        </div>
+                    </li>
+                @endforeach
+            </ul>
+            <button id="next-slide" class="slide-button material-symbols-rounded">
+                chevron_right
+            </button>
+        </div>
+        <div class="slider-scrollbar">
+            <div class="scrollbar-track">
+                <div class="scrollbar-thumb"></div>
+            </div>
+        </div>
+    </div>
+    <div class="container">
+        <h2 style="text-align: center; margin:20px;">All products</h2>
+        <div class="slider-wrapper">
+            <button id="prev-slide" class="slide-button material-symbols-rounded">
+                chevron_left
+            </button>
+            <ul class="image-list">
+                @foreach ($allDish as $value)
+                    <li class="card" style="width: 20rem;">
+                        <a href="{{ route('users.dish', ['id' => $value->dish_id]) }}"><img
+                                src="/storage/images/{{ $value->image_dish }}" class="card-img-top" alt="..."
+                                height="600px"></a>
                         <div class="card-body">
                             <div class="name-price">
                                 <h5 class="card-title">{{ $value->dish_name }}</h5>
                                 <h6 style="color: red">${{ $value->price }}</h6>
-
-                                {{-- <h5 id="iconContainer" onclick="toggleIcon(this)" data-icon="{{ $value->dish_id }}">
-                                    <i id="icon" class="fa-regular fa-heart"></i>
-                                </h5> --}}
                                 <h5 id="iconContainer"onclick="toggleIcon(this)" data-icon="{{ $value->dish_id }}">
                                     <a
                                         href="{{ session()->get('logged_in') ? route('users.favorites.add', ['id' => $value->dish_id]) : route('users.login') }}">
                                         <i class="icon_favorite fa-regular fa-heart"></i>
-                                        {{-- <i  id="icon_favorite" class="{{($isFavoritedDish)?'fas':'far'}} fa-heart"></i> --}}
                                     </a>
                                 </h5>
                             </div>
@@ -129,50 +168,7 @@
                             </div>
                         </div>
                     </li>
-                @endforeach
 
-                {{-- <button id="next-slide" class="slide-button material-symbols-rounded">
-                    chevron_right
-                </button> --}}
-        </div>
-        <div class="slider-scrollbar">
-            <div class="scrollbar-track">
-                <div class="scrollbar-thumb"></div>
-            </div>
-        </div>
-    </div>
-
-
-    <div class="container">
-        <h2 style="text-align: center; margin:20px;">All products</h2>
-        <div class="slider-wrapper">
-            <button id="prev-slide" class="slide-button material-symbols-rounded">
-                chevron_left
-            </button>
-            <ul class="image-list">
-                @foreach ($allDish as $value)
-                    <li class="card" style="width: 20rem;">
-                        <a href="#"><img src="/storage/images/{{ $value->image_dish }}" class="card-img-top"
-                                alt="..." height="600px"></a>
-                        <div class="card-body">
-                            <div class="name-price">
-                                <h5 class="card-title">{{ $value->dish_name }}</h5>
-                                <h6 style="color: red">${{ $value->price }}</h6>
-                                {{-- 
-              <h5 id="iconContainer" onclick="toggleIcon(this)" data-icon="{{$value->dish_id}}">
-                  <i id="icon" class="fa-regular fa-heart"></i>
-              </h5> --}}
-                                <h5 id="iconContainer"data-icon="{{ $value->dish_id }}">
-                                    <i id="icon" class="fa-regular fa-heart"></i>
-                                </h5>
-                            </div>
-                            <div>
-                                <a href="#" style="margin-right: 56px; display: inline-block; width: 125px;"
-                                    class="btn btn-primary">Detail</a>
-                                <a href="#" class="btn btn-danger">Add to cart</a>
-                            </div>
-                        </div>
-                    </li>
                 @endforeach
 
                 <button id="next-slide" class="slide-button material-symbols-rounded">

@@ -49,20 +49,23 @@
             <li class="nav-item">
                 <a class="nav-link active users-navbar-contactus" aria-current="page" href="#" style="padding-top: 50px;">About us</a>
             </li>
+            @if (!session('logged_in'))
             <li class="nav-item">
                 <a class="nav-link active users-navbar-contactus" aria-current="page" href="{{route('users.login')}}" style="padding-top: 50px;">Log in</a>
             </li>
             <li class="nav-item">
                 <a class="nav-link active users-navbar-contactus" aria-current="page" href="{{route('users.register')}}" style="padding-top: 50px;">Sign in</a>
             </li>
+            @endif
             <div>
             @if (session('logged_in'))
             <li class="nav-item dropdown ">
-                <a class="nav-link dropdown-toggle" href="#" id="userDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+                <h5 class="nav-link dropdown-toggle" id="userDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
                     <img src="https://cdn.sforum.vn/sforum/wp-content/uploads/2023/11/avatar-dep-89.jpg" alt="avatar" style="width: 50px;height:50px;border-radius:50%; margin-left:170px;">
-                </a>
+                </h5>
                 <ul class="dropdown-menu" aria-labelledby="userDropdown">
                     <li><a class="dropdown-item" href="{{route('users.logout') }}">Logout</a></li>
+                    <li><a class="dropdown-item" href="{{route('users.list-favorites')}}">Favorite</a></li>
                 </ul>
             </li>
             @endif
