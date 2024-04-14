@@ -16,6 +16,11 @@ class HomeController extends Controller
     $listRandom = DB::table('dish')->inRandomOrder()->limit(10)->get();
     $listRandomPromotion = DB::table('dish')->where('discount', '>', 1)->inRandomOrder()->limit(10)->get(); 
     $listDishId = session()->get('favoriteId', []);
+    // get banner
+    $bigBanner = DB::table('banners')->get();
+    //get category
+    $category =DB::table('category')->get();
+
     if (session()->has('favoriteNewId')) {
         $favoriteNewId = session()->get('favoriteNewId');
         if (!in_array($favoriteNewId, $listDishId)) {
@@ -23,7 +28,7 @@ class HomeController extends Controller
             session()->put('favoriteId', $listDishId); 
         }
     }
-    return view('clients.home', compact('listDish', 'allDish', 'listRandom', 'listRandomPromotion', 'listDishId'));
+    return view('clients.home', compact('listDish', 'allDish', 'listRandom', 'listRandomPromotion', 'listDishId','bigBanner','category'));
 }
     public function isFavorite($user_id, $dish_id){
         $isFavorite = DB::table('favorites')
