@@ -199,7 +199,7 @@
                 <div class="scrollbar-thumb"></div>
             </div>
         </div>
-    </div>  
+    </div> 
 @endsection
 @section('css')
     <link rel="stylesheet" href="{{ asset('assets/css/clients/home.css') }}">
