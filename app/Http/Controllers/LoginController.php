@@ -5,7 +5,9 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Log;
+use Illuminate\Support\Facades\DB;
 use App\Models\User;
+use App\Models\Favorite;
 use Illuminate\Support\Facades\Validator;
 
 class LoginController extends Controller
@@ -40,13 +42,24 @@ class LoginController extends Controller
                     $request->session()->put('user_id', $user->user_id);
                     $request->session()->put('logged_in', true);
 
-                    return redirect()->route('admin.dashboard.dashboard');
+                    return redirect()->route('manage-contact');
                 } elseif ($user->role === 'customer') {
                     // Lưu thông tin người dùng vào session
                     $request->session()->put('user_id', $user->user_id);
                     $request->session()->put('logged_in', true);
-
-                    return view('layouts.clients');
+                    $user_id =  $request->session()->get('user_id', $user->user_id);
+                    $listDish =  DB::table('favorites')
+                        ->join('dish', 'favorites.dish_id', '=', 'dish.dish_id')
+                        ->where('favorites.user_id', $user_id)
+                        ->select('dish.*')
+                        ->get();   
+                    $array = [];
+                    foreach ($listDish as $dish){
+                        $id = $dish->dish_id;
+                        $array[$id] = $id;
+                    }
+                    $request->session()->put('favoriteId', $array);
+                    return redirect(route('home'));
                 }
             } else {
                 $validator->errors()->add('Password', 'Invalid password.');
@@ -64,10 +77,11 @@ class LoginController extends Controller
     // Xóa thông tin người dùng từ session
     $request->session()->forget('user_id');
     $request->session()->forget('logged_in');
-
+    $request->session()->forget('favoriteId');
+    $request->session()->forget('favoriteNewId');
     // Đăng xuất người dùng
     Auth::logout();
 
-    return view('layouts.clients');
+    return redirect(route('home'));
 }
 }

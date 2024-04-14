@@ -17,13 +17,6 @@
                 @foreach ($category as $value)
                     <button class="btn rounded-pill"><a class="link-btn">{{$value->category_name}}</a></button>                    
                 @endforeach
-                {{-- <button class="btn   rounded-pill"><a class="link-btn" href="">Snacks</a></button>
-                <button class="btn   rounded-pill"><a class="link-btn">Vegetarianfood</a></button>
-                <button class="btn   rounded-pill"><a class="link-btn">Rice</a></button>
-                <button class="btn   rounded-pill"><a class="link-btn">Noodle</a></button>
-                <button class="btn   rounded-pill"><a class="link-btn">Noodle</a></button>
-                <button class="btn   rounded-pill"><a class="link-btn">Noodle</a></button>
-                <button class="btn   rounded-pill"><a class="link-btn">Noodle</a></button> --}}
             </div> 
             
         
@@ -39,15 +32,6 @@
                             <img src="/storage/banners/{{$value->image}}" class="d-block w-100 _9puaeP OooQQJ  banner-img" alt="...">
                         </div>
                     @endforeach
-                  {{-- <div class="carousel-item" data-bs-interval="2000">
-                    <img src="https://cf.shopee.vn/file/vn-50009109-cbe02f3f2cdbd9b1bf7b5f043f003293_xhdpi" class="d-block w-100 _9puaeP OooQQJ  banner-img" alt="...">
-                  </div>
-                  <div class="carousel-item">
-                    <img src="https://cf.shopee.vn/file/vn-50009109-cbe02f3f2cdbd9b1bf7b5f043f003293_xhdpi" class="d-block w-100 _9puaeP OooQQJ  banner-img" alt="...">
-                  </div>
-                  <div class="carousel-item">
-                    <img src="https://cf.shopee.vn/file/vn-50009109-cbe02f3f2cdbd9b1bf7b5f043f003293_xhdpi" class="d-block w-100 _9puaeP OooQQJ  banner-img" alt="...">
-                  </div> --}}
                 </div>
                 
                 <button class="carousel-control-prev" type="button" data-bs-target="#carouselExampleInterval" data-bs-slide="prev">
@@ -168,19 +152,29 @@
                 chevron_left
             </button>
             <ul class="image-list">
-                @foreach ($allDish as $value)
+                @foreach ($listRandomPromotion as $value)
                     <li class="card" style="width: 20rem;">
-                        <a href="#"><img src="/storage/images/{{ $value->image_dish }}" class="card-img-top"
-                                alt="..." height="600px"></a>
+                        <a href="{{ route('users.dish', ['id' => $value->dish_id]) }}"><img
+                                src="/storage/images/{{ $value->image_dish }}" class="card-img-top" alt="..."
+                                height="600px"></a>
                         <div class="card-body">
                             <div class="name-price">
                                 <h5 class="card-title">{{ $value->dish_name }}</h5>
-                                <h6 style="color: red">${{ $value->price }}</h6>
-
-                                <h5 id="iconContainer" onclick="toggleIcon(this)" data-icon="{{ $value->dish_id }}">
-                                    <i id="icon" class="fa-regular fa-heart"></i>
-                                </h5>
-
+                                <h6 style="color: red"><del>${{ $value->price }}</del>
+                                    ${{ number_format($value->price * (1 - $value->discount / 100), 2) }}</h6>
+                                    <h5 id="iconContainer"onclick="toggleIcon(this)" data-icon="{{ $value->dish_id }}">
+                                        <a
+                                        href="{{ session()->get('logged_in') ? route('users.favorites.add', ['id' => $value->dish_id]) : route('users.login') }}">
+                                        @if (in_array($value->dish_id, $listDishId))
+                                            <i class="icon_favorite fa-solid fa-heart"></i>
+                                        @else
+                                            <i class="icon_favorite fa-regular fa-heart"></i>
+                                        @endif
+                                    </a>
+                                    </h5>
+                                @if ($value->discount > 1)
+                                    <h1 class="corner-badge">{{ $value->discount }}%</h1>
+                                @endif
                             </div>
                             <div>
                                 <a href="#" style="margin-right: 56px; display: inline-block; width: 125px;"
@@ -190,18 +184,17 @@
                         </div>
                     </li>
                 @endforeach
-
-                <button id="next-slide" class="slide-button material-symbols-rounded">
-                    chevron_right
-                </button>
+            </ul>
+            <button id="next-slide" class="slide-button material-symbols-rounded">
+                chevron_right
+            </button>
         </div>
         <div class="slider-scrollbar">
             <div class="scrollbar-track">
                 <div class="scrollbar-thumb"></div>
             </div>
         </div>
-    </div>
-    
+    </div>  
 @endsection
 @section('css')
     <link rel="stylesheet" href="{{ asset('assets/css/clients/home.css') }}">
