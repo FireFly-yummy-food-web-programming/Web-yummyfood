@@ -115,9 +115,13 @@
                                     ${{ number_format($value->price * (1 - $value->discount / 100), 2) }}</h6>
                                     <h5 id="iconContainer"onclick="toggleIcon(this)" data-icon="{{ $value->dish_id }}">
                                         <a
-                                            href="{{ session()->get('logged_in') ? route('users.favorites.add', ['id' => $value->dish_id]) : route('users.login') }}">
+                                        href="{{ session()->get('logged_in') ? route('users.favorites.add', ['id' => $value->dish_id]) : route('users.login') }}">
+                                        @if (in_array($value->dish_id, $listDishId))
+                                            <i class="icon_favorite fa-solid fa-heart"></i>
+                                        @else
                                             <i class="icon_favorite fa-regular fa-heart"></i>
-                                        </a>
+                                        @endif
+                                    </a>
                                     </h5>
                                 @if ($value->discount > 1)
                                     <h1 class="corner-badge">{{ $value->discount }}%</h1>
@@ -161,7 +165,11 @@
                                 <h5 id="iconContainer"onclick="toggleIcon(this)" data-icon="{{ $value->dish_id }}">
                                     <a
                                         href="{{ session()->get('logged_in') ? route('users.favorites.add', ['id' => $value->dish_id]) : route('users.login') }}">
-                                        <i class="icon_favorite fa-regular fa-heart"></i>
+                                        @if (in_array($value->dish_id, $listDishId))
+                                            <i class="icon_favorite fa-solid fa-heart"></i>
+                                        @else
+                                            <i class="icon_favorite fa-regular fa-heart"></i>
+                                        @endif
                                     </a>
                                 </h5>
                             </div>
