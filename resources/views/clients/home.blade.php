@@ -69,7 +69,11 @@
                                 <h5 id="iconContainer"onclick="toggleIcon(this)" data-icon="{{ $value->dish_id }}">
                                     <a
                                         href="{{ session()->get('logged_in') ? route('users.favorites.add', ['id' => $value->dish_id]) : route('users.login') }}">
-                                        <i class="icon_favorite fa-regular fa-heart"></i>
+                                        @if (in_array($value->dish_id, $listDishId))
+                                            <i class="icon_favorite fa-solid fa-heart"></i>
+                                        @else
+                                            <i class="icon_favorite fa-regular fa-heart"></i>
+                                        @endif
                                     </a>
                                 </h5>
                             </div>
