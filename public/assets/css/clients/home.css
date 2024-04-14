@@ -65,9 +65,12 @@
 }
 
 .button-categories {
-  display: flex;
-  width: 600px;
-}
+  display: block;
+  width: 500px;
+  /* justify-content: space-between; */
+  margin-right: auto;
+  margin-left: auto;
+} 
 
 .button-categories button {
   flex: 1;
@@ -92,102 +95,28 @@
   color: #000;
 }
 
-/* begin css for banner */
-/* .banner{
-  transform: translateY(-49px);
-}
-.bgImage{
-  position: relative;
-  width: 100%;
-  height: 100vh;
-  background-image: url('/images/banner/food.jpg');
-  background-repeat:no-repeat;
-  background-size: cover;
-  background-position: center;
-  animation: bgchange 20s linear infinite;
-}
-@keyframes bgchange{
-  0%{
-      background-image: url('/assets/banner/food.jpg');
-  }
-  20%{
-      background-image: url('/assets/banner/food.jpg');
-  }
-  25%{
-      background-image: url('/assets/banner/discount.jpg');
-  }
-  45%{
-      background-image: url('/assets/banner/discount.jpg');
-  }
-  50%{
-      background-image: url('/assets/banner/dishsale.jpg');
-  }
-  70%{
-      background-image: url('/assets/banner/dishsale.jpg');
-  }
-  75%{
-      background-image: url('/assets/banner/food.jpg');
-  }
-  95%{
-      background-image: url('/assets/banner/food.jpg');
-  }
-
-}
-.overlay{
-  position: absolute;
-  width: 100%;
-  height: 100%;
-  top: 0px;
-  left: 0px;
-  background-color: rgba(0, 0, 0, 0.3);
-}
-.content-banner{
-  position: relative;
-  width: 100%;
-  height: 100%;
-  color: white;
-  display: flex;
-  justify-content: center;
-  flex-direction: column;
-  z-index: 2;
-
-}
-.content-banner h1{
-  font-size: 60px;
-  margin-bottom: 0px;
-  padding: 5%;
-}
-
-.content-banner h1 span{
-  color: #dc3545;
-  font-size: 100px;
-}
-
-.content-banner .banner-text{
-  font-size: 18px;
-  width: 60%;
-  padding-bottom: 10px;
-  justify-content: right;
-  padding-left: 30px;
-}
-.banner-buynow{
-  font-size: 150px;
-  color: #dc3545;
-  text-align: end;
-  transform: translateX(-40px);
-  text-shadow: 
-        0 1px 0 rgba(255, 255, 255, 0.8), /* Bóng mềm màu trắng ở trên */
-        /* 0 2px 1px rgba(0, 0, 1), Bóng mềm màu đen ở dưới */
-        /* 0 0 10px rgba(0, 0, 0, 1); Bóng sắc nét ở xa */
-/* } */ 
-
-/* end css for banner */
 
 /* begin for banner */
+  .banner .carousel-inner{
+    border-radius: 10px;
+
+  }  
+  .banner-img{
+    margin-top: 0;
+    margin-left: 4%;
+    padding: 0;
+    height: 259px;
+    object-fit: cover;
+    /* width: 110%; */
+    width: fit-content;
+    border-radius: 15px;
+    box-shadow: 3px 3px 5px rgba(0, 0, 0, 0.3);
+  }
    .banner-fix img{
     object-fit: cover !important;
     height: 100% !important;
-    width: 100% !important;
+    /* width: 100% !important; */
+    width: 100%;
     margin-top: 0;
   }
 

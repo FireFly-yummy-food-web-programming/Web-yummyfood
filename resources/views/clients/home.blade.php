@@ -10,99 +10,46 @@
             </div>
 
         </div>
-
-        <div class="button-categories d-flex gap-4">
-            <button class="btn  btn-danger  rounded-pill"><a class="link-btn" href="">all</a></button>
-            <button class="btn   rounded-pill"><a class="link-btn" href="">Snacks</a></button>
-            <button class="btn   rounded-pill"><a class="link-btn">Vegetarianfood</a></button>
-            <button class="btn   rounded-pill"><a class="link-btn">Rice</a></button>
-            <button class="btn   rounded-pill"><a class="link-btn">Noodle</a></button>
-            {{-- <button class="btn   rounded-pill"><a class="link-btn">Drinks</a></button>
-        <button class="btn   rounded-pill"><a class="link-btn">Milk tea</a></button> --}}
-        </div>
-        {{-- @yield('content') --}}
+        
+            
+            <div class="button-categories">
+                <button class="btn  btn-danger  rounded-pill"><a class="link-btn" href="">all</a></button>
+                @foreach ($category as $value)
+                    <button class="btn rounded-pill"><a class="link-btn">{{$value->category_name}}</a></button>                    
+                @endforeach
+                {{-- <button class="btn   rounded-pill"><a class="link-btn" href="">Snacks</a></button>
+                <button class="btn   rounded-pill"><a class="link-btn">Vegetarianfood</a></button>
+                <button class="btn   rounded-pill"><a class="link-btn">Rice</a></button>
+                <button class="btn   rounded-pill"><a class="link-btn">Noodle</a></button>
+                <button class="btn   rounded-pill"><a class="link-btn">Noodle</a></button>
+                <button class="btn   rounded-pill"><a class="link-btn">Noodle</a></button>
+                <button class="btn   rounded-pill"><a class="link-btn">Noodle</a></button> --}}
+            </div> 
+            
+        
     </div>
-    {{-- @foreach ($listDish as $value)
-        {{-- # code... --}}
-    {{-- <h4 class="" >{{$value->dish_name}}</h4>     --}}
-    {{-- @endforeach --}}
-    {{-- <div class="banner">    
-  <div class="bgImage">
-      <div class="overlay"></div>
-
-      <div class="content-banner">
-          <h1>Big <span>Sale</span></h1>
-          <p class="banner-text">
-              Lorem ipsum dolor sit amet consectetur adipisicing elit. 
-              Amet, commodi? Molestiae laborum perferendis deleniti assumenda modi, 
-              sit quas maiores, sint molestias voluptatum repudiandae aspernatur nemo, 
-              velit ullam delectus id architecto!
-              Explicabo quibusdam ullam voluptas voluptate corporis cupiditate libero 
-              rem ad quod consequatur dolorum alias porro eos doloribus quisquam a, 
-              pariatur autem rerum, amet atque non adipisci facere. Perferendis, 
-              iure officia.
-          </p>
-          <p class="banner-buynow">
-              Buy now
-          </p>
-      </div>
-  </div>
-  </div> --}}
-    {{-- <div class="container">
-        <div class="row">
-            <div class="col-md-8">
-                <div id="carouselExampleControls" class="carousel" data-bs-ride="carousel">
-                    <div class="carousel-inner">
-                        <div class="carousel-item active">
-                            <img src="https://cf.shopee.vn/file/vn-50009109-cbe02f3f2cdbd9b1bf7b5f043f003293_xhdpi"
-                                width="102%" height="365px" class="d-block w-100" alt="...">
-                        </div>
-                        <div class="carousel-item">
-                            <img src="https://cf.shopee.vn/file/vn-50009109-cbe02f3f2cdbd9b1bf7b5f043f003293_xhdpi"
-                                class="d-block w-100" alt="...">
-                        </div>
-                        <div class="carousel-item">
-                            <img src="https://cf.shopee.vn/file/vn-50009109-cbe02f3f2cdbd9b1bf7b5f043f003293_xhdpi"
-                                class="d-block w-100" alt="...">
-                        </div>
-                    </div>
-                    <button class="carousel-control-prev" type="button" data-bs-target="#carouselExampleControls"
-                        data-bs-slide="prev">
-                        <span class="carousel-control-prev-icon" aria-hidden="true"></span>
-                        <span class="visually-hidden">Previous</span>
-                    </button>
-                    <button class="carousel-control-next" type="button" data-bs-target="#carouselExampleControls"
-                        data-bs-slide="next">
-                        <span class="carousel-control-next-icon" aria-hidden="true"></span>
-                        <span class="visually-hidden">Next</span>
-                    </button>
-                </div>
-            </div>
-            <div class="col-md-4">
-                <div class="banner-fix"><img width="invalid-value" height="invalid-value" width="100%" alt="Banner"
-                        class="_9puaeP OooQQJ" style="object-fit: cover" importance="height;width"
-                        src="https://cf.shopee.vn/file/vn-50009109-cbe02f3f2cdbd9b1bf7b5f043f003293_xhdpi"></div>
-                <div class="banner-fix" style="padding-top:5px "><img width="invalid-value" height="invalid-value"
-                        alt="Banner" class="_9puaeP OooQQJ" style="object-fit: cover"
-                        src="https://cf.shopee.vn/file/vn-50009109-cbe02f3f2cdbd9b1bf7b5f043f003293_xhdpi"></div>
-            </div>
-        </div>
-    </div> --}}
-    {{-- <div class="container">
+    
+    <div class="container banner">
         <div class="row">
             <div class="col-md-8">
               <div id="carouselExampleInterval" class="carousel slide" data-bs-ride="carousel">
-                <div class="carousel-inner">
-                  <div class="carousel-item active" data-bs-interval="10000">
-                    <img src="https://cf.shopee.vn/file/vn-50009109-cbe02f3f2cdbd9b1bf7b5f043f003293_xhdpi" class="d-block w-100" alt="...">
-                  </div>
-                  <div class="carousel-item" data-bs-interval="2000">
-                    <img src="https://cf.shopee.vn/file/vn-50009109-cbe02f3f2cdbd9b1bf7b5f043f003293_xhdpi" class="d-block w-100" alt="...">
+                <div class="carousel-inner" >
+                    @foreach($bigBanner as $value)
+                        <div class="carousel-item active" data-bs-interval="2300">
+                            <img src="/storage/banners/{{$value->image}}" class="d-block w-100 _9puaeP OooQQJ  banner-img" alt="...">
+                        </div>
+                    @endforeach
+                  {{-- <div class="carousel-item" data-bs-interval="2000">
+                    <img src="https://cf.shopee.vn/file/vn-50009109-cbe02f3f2cdbd9b1bf7b5f043f003293_xhdpi" class="d-block w-100 _9puaeP OooQQJ  banner-img" alt="...">
                   </div>
                   <div class="carousel-item">
-                    <img src="https://cf.shopee.vn/file/vn-50009109-cbe02f3f2cdbd9b1bf7b5f043f003293_xhdpi" class="d-block w-100" alt="...">
+                    <img src="https://cf.shopee.vn/file/vn-50009109-cbe02f3f2cdbd9b1bf7b5f043f003293_xhdpi" class="d-block w-100 _9puaeP OooQQJ  banner-img" alt="...">
                   </div>
+                  <div class="carousel-item">
+                    <img src="https://cf.shopee.vn/file/vn-50009109-cbe02f3f2cdbd9b1bf7b5f043f003293_xhdpi" class="d-block w-100 _9puaeP OooQQJ  banner-img" alt="...">
+                  </div> --}}
                 </div>
+                
                 <button class="carousel-control-prev" type="button" data-bs-target="#carouselExampleInterval" data-bs-slide="prev">
                   <span class="carousel-control-prev-icon" aria-hidden="true"></span>
                   <span class="visually-hidden">Previous</span>
@@ -114,15 +61,19 @@
               </div>
             </div>
             <div class="col-md-4">
-                <div class="banner-fix"><img width="invalid-value" height="invalid-value" width="100%" alt="Banner"
+                <div class="banner-fix">
+                        <img width="invalid-value" height="invalid-value" width="100%" alt="Banner"
                         class="_9puaeP OooQQJ" style="object-fit: cover" importance="height;width"
-                        src="https://cf.shopee.vn/file/vn-50009109-cbe02f3f2cdbd9b1bf7b5f043f003293_xhdpi"></div>
-                <div class="banner-fix" style="padding-top:5px "><img width="invalid-value" height="invalid-value"
+                        src="/storage/banners/banner-sale.png">
+                </div>
+                <div class="banner-fix" style="padding-top:10px ">
+                        <img width="invalid-value" height="invalid-value"
                         alt="Banner" class="_9puaeP OooQQJ" style="object-fit: cover"
-                        src="https://cf.shopee.vn/file/vn-50009109-cbe02f3f2cdbd9b1bf7b5f043f003293_xhdpi"></div>
+                        src="/storage/banners/banner-saler.png">
+                </div>
             </div>
         </div>
-    </div> --}}
+    </div>
 
 
     <div class="container">
