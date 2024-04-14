@@ -5,46 +5,42 @@ namespace App\Http\Controllers\Clients;
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use App\Models\Cart;
-use Illuminate\Support\Facades\Auth;
+use App\Models\User;
+
 
 class CartController extends Controller
 {
-    public function index()
-    {
-        return view('clients.cart');
-    }
 
     public function addToCart(Request $request, $id)
-    {
-        // Kiểm tra xem người dùng đã đăng nhập chưa
-        if (!auth()->check()) {
-            return response()->json(['error' => 'Bạn cần đăng nhập để thực hiện chức năng này.'], 403);
-        }
+{
+    $user_id = $request->session()->get('user_id');
 
-        // Lấy thông tin người dùng hiện tại
-        $user = Auth::user();
+    if (!$user_id) {
+        // Nếu chưa đăng nhập, có thể chuyển hướng người dùng đến trang đăng nhập
+        return redirect()->route('users/login');
 
-        // Kiểm tra xem sản phẩm đã tồn tại trong giỏ hàng của người dùng chưa
-        $existingCartItem = Cart::where('user_id', $user->id)
-            ->where('dish_id', $id)
-            ->first();
+        // Hoặc có thể trả về một thông báo lỗi
+        // return response()->json(['error' => 'Bạn cần đăng nhập để thêm sản phẩm vào giỏ hàng.'], 401);
+    }
 
-        // Nếu sản phẩm đã tồn tại trong giỏ hàng, tăng số lượng
-        if ($existingCartItem) {
-            $existingCartItem->quantity += 1;
-            $existingCartItem->save();
-            return response()->json(['message' => 'Số lượng sản phẩm đã được cập nhật trong giỏ hàng.'], 200);
-        }
+    $existingCartItem = Cart::where('user_id', $user_id)
+        ->where('dish_id', $id)
+        ->first();
 
-        // Nếu sản phẩm chưa tồn tại trong giỏ hàng, thêm sản phẩm mới
+    if ($existingCartItem) {
+        $existingCartItem->quantity += 1;
+        $existingCartItem->save();
+    } else {
         $cartItem = new Cart();
-        $cartItem->user_id = $user->id;
+        $cartItem->user_id = $user_id;
         $cartItem->dish_id = $id;
         $cartItem->quantity = 1;
         $cartItem->save();
-
-        return response()->json(['message' => 'Sản phẩm đã được thêm vào giỏ hàng.'], 200);
     }
+
+    $cartItems = Cart::where('user_id', $user_id)->get();
+    return view('clients.cart', compact('cartItems'));
+}
 
     public function viewCart()
     {

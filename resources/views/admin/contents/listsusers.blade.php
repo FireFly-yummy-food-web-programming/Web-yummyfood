@@ -8,7 +8,6 @@
 @if(session("msg"))
     <div class="alert alert-success">{{session('msg')}}</div>
 @endif
-    <a href="{{route('add-users')}}" class="btn btn-primary">Add</a>
     <table class="table table-bordered">
         <thead>
             <tr>
@@ -35,10 +34,12 @@
                         <td>{{$users->Email}}</td>
                         <td>{{$users->role}}</td>
                         <td>
-                            <a href="{{route('edit-users',['id'=>$users->user_id])}}" class="btn btn-success btn-sm"><i class="fa-solid fa-pencil"></i></a>
-                            <button type="button" class="btn btn-light border-white bg-white" onclick="handleDelete({{$users->user_id}})">
+                            <div class="row m-0">
+                            <a href="{{route('edit-users',['id'=>$users->user_id])}}" class="btn btn-success btn-sm col-5 h-5"><i class="fa-solid fa-pencil"></i></a>
+                            <button type="button" class="btn btn-light border-white bg-white col-5" onclick="handleDelete({{$users->user_id}})">
                                 <a href="#" class="btn btn-danger btn-sm"><i class="fa-solid fa-trash"></i></a>
                             </button>
+                            </div>
                         </td>    
                     </tr>
                     @endif

@@ -40,13 +40,13 @@ class LoginController extends Controller
                     $request->session()->put('user_id', $user->user_id);
                     $request->session()->put('logged_in', true);
 
-                    return redirect()->route('admin.dashboard.dashboard');
+                    return redirect()->route('manage-contact');
                 } elseif ($user->role === 'customer') {
                     // Lưu thông tin người dùng vào session
                     $request->session()->put('user_id', $user->user_id);
                     $request->session()->put('logged_in', true);
 
-                    return view('layouts.clients');
+                    return redirect(route('home'));
                 }
             } else {
                 $validator->errors()->add('Password', 'Invalid password.');
@@ -68,6 +68,6 @@ class LoginController extends Controller
     // Đăng xuất người dùng
     Auth::logout();
 
-    return view('layouts.clients');
+    return redirect(route('home'));
 }
 }

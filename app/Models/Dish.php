@@ -71,9 +71,11 @@ class Dish extends Model
         $dish->delete();
         return $dish;
     }
+
     public function RestoreDish($id)
     {
         $dish = $this->withTrashed()->findOrFail($id);
         $dish->restore();
     }
+
 }

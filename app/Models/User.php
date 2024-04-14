@@ -21,4 +21,9 @@ class User extends Model
     {
         return password_verify($password, $this->Password);
     }
+
+    public function carts()
+    {
+        return $this->hasMany(Cart::class);
+    }
 }
