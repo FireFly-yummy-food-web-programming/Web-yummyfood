@@ -76,11 +76,16 @@
                             <div class="name-price">
                                 <h5 class="card-title">{{ $value->dish_name }}</h5>
                                 <h6 style="color: red">${{ $value->price }}</h6>
-
-                                <h5 id="iconContainer" onclick="toggleIcon(this)" data-icon="{{ $value->dish_id }}">
-                                    <i id="icon" class="fa-regular fa-heart"></i>
+                                <h5 id="iconContainer"onclick="toggleIcon(this)" data-icon="{{ $value->dish_id }}">
+                                    <a
+                                        href="{{ session()->get('logged_in') ? route('users.favorites.add', ['id' => $value->dish_id]) : route('users.login') }}">
+                                        @if (in_array($value->dish_id, $listDishId))
+                                            <i class="icon_favorite fa-solid fa-heart"></i>
+                                        @else
+                                            <i class="icon_favorite fa-regular fa-heart"></i>
+                                        @endif
+                                    </a>
                                 </h5>
-
                             </div>
                             <div>
                                 <a href="#" style="margin-right: 56px; display: inline-block; width: 125px;"
@@ -90,10 +95,10 @@
                         </div>
                     </li>
                 @endforeach
-
-                <button id="next-slide" class="slide-button material-symbols-rounded">
-                    chevron_right
-                </button>
+            </ul>
+            <button id="next-slide" class="slide-button material-symbols-rounded">
+                chevron_right
+            </button>
         </div>
         <div class="slider-scrollbar">
             <div class="scrollbar-track">
