@@ -24,13 +24,6 @@
         @enderror
     </div>
     <div class="mb-3">
-        <label for="">Password</label>
-        <input type="password" name="Password" class="form-control" id="password-input" placeholder="Password" value="{{old('Password') ?? $user->Password }}">
-        @error('Password')
-            <span style="color: red">{{$message}}</span>
-        @enderror
-    </div>
-    <div class="mb-3">
         <label for="">Name</label>
         <input type="text" name="Name" class="form-control" id="name-input" placeholder="Name" value="{{old('Name') ?? $user->Name }}">
         @error('Name')
