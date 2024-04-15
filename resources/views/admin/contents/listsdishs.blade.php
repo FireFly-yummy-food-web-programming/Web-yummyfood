@@ -36,7 +36,6 @@
                     <td>{{$dish->price}}</td>
                     <td>{{$dish->discount}}</td>
                     <td>
-                        {{-- {{route('edit-dish',['id'=>$dish->dish_id])}} --}}
                         <a href="{{route('edit-dish',['id'=>$dish->dish_id])}}" class="btn btn-success btn-sm"><i class="fa-solid fa-pencil"></i></a>
                         <button type="button" class="btn btn-light border-white bg-white" onclick="handleDeleteDish({{$dish->dish_id}})">
                             <a href="#" class="btn btn-danger btn-sm"><i class="fa-solid fa-trash"></i></a>
@@ -91,43 +90,6 @@
         </div>
       </div>
 </form>
-<h3>Trash</h3>
-<table class="table table-bordered">
-  <thead>
-      <tr>
-          <th>Numerical</th>
-          <th>Name</th>
-          <th>Categories</th>
-          <th>Images</th>
-          <th>Details</th>
-          <th>Price</th>
-          <th style="width: 150px;">Action</th>
-      </tr>
-  </thead>
-  <tbody>
-      @if(!empty($listDish))
-          @foreach($listDish as $index => $dish)
-          @if($dish->deleted_at != NULL)
-          <tr colspan = "6">
-              <td>{{$index+1}}</td>
-              <td>{{$dish->dish_name}}</td>
-              <td>{{$dish->category_name}}</td>
-              <td><img src="{{ asset('storage/images/'. $dish->image_dish) }}" alt="image" style="width:70%">
-              </td>
-              <td>{{$dish->details}}</td>
-              <td>{{$dish->price}}</td>
-              <td>
-                  <a href="{{route('edit-dish',['id'=>$dish->dish_id ])}}" class="btn btn-success btn-sm"><i class="fa-solid fa-pencil"></i></a>
-                  <button type="button" class="btn btn-light border-white bg-white" onclick="handleRestoreDish({{$dish->dish_id}})">
-                    <a href="#" class="btn btn-success btn-sm">Restore</a>
-                </button>
-              </td>    
-          </tr>
-          @endif
-          @endforeach
-      @endif
-  </tbody>
-</table>
 @section('js')
 <script src="{{asset('assets/js/modaldelete.js')}}"></script>
 @endsection

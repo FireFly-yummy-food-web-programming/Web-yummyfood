@@ -46,6 +46,7 @@ class Dish extends Model
         $dish->image_dish = $data['image_dish'];
         $dish->details = $data['detail'];
         $dish->price = $data['price'];
+        $dish->discount = $data['discount'];
         $dish->save();
     }
     public function getDishDetail($id)
@@ -65,6 +66,7 @@ class Dish extends Model
                 'price' => $data['price'],
                 'details' => $data['detail'],
                 'image_dish' => $data['image_dish'],
+                'discount' => $data['discount'],
             ]);
     }
 

@@ -47,6 +47,13 @@
                     <span style="color: red">{{$message}}</span>
                 @enderror
             </div>
+            <div class="mb-3">
+                <label for="">Discount</label>
+                <input type="text" name="discount" class="form-control input-add-dish" id="" placeholder="Discount" value="{{old('discount')}}">
+                @error('discount')
+                    <span style="color: red">{{$message}}</span>
+                @enderror
+            </div>
         </div>
        <div class="button">
         <button type="submit" class="btn btn-primary">Add new</button>
