@@ -1,0 +1,317 @@
+@import url('https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;1,500&display=swap');
+
+.header{
+    text-align: center;
+    background-image: url('/assets/images/background.png');
+    background-size: cover; /* Tuỳ chỉnh kích thước ảnh */
+    background-position: center; /* Căn giữa ảnh */
+    /* Các thuộc tính khác cho hình nền của bạn */
+    background-repeat: no-repeat;
+    width: 100%;
+    height: 800px;
+
+    margin: 10px 0 50px 0;
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+        gap: 40px;
+}
+.corner-badge {
+  position: absolute; /* Tạo vị trí tuyệt đối để căn chỉnh */
+  top: 0; /* Đặt vị trí bên trên cùng */
+  left: 0; /* Đặt vị trí bên trái */
+  margin: 10px; /* Khoảng cách từ viền */
+  padding: 5px 10px; /* Khoảng cách bên trong thẻ */
+  background-color: #FF0000; /* Màu nền */
+  color: #FFFFFF; /* Màu chữ */
+  font-size: 20px; /* Kích thước chữ */
+}
+.header .heading{
+  /* color: #000; */
+    width: 725px;
+    /* Headline/H1 */
+    font-family: Playfair Display;
+    font-size: 100px;
+    font-weight: 400;
+    line-height: 96px; /* 96% */
+}
+.search-container {
+    position: relative;
+    display: inline-block;
+}
+
+.search-input {
+    padding: 10px;
+    border: 1px solid #ccc;
+    border-radius: 25px;
+    width: 600px; /* Adjust the width as needed */
+    outline: none;
+}
+
+.search-button:hover{
+  background-color: #dc3545;
+}
+
+.search-button {
+    position: absolute;
+    top: 0;
+    right: 0;
+    padding: 10px;
+    border: 1px solid #ccc;
+    border-radius: 0 5px 5px 0;
+    background-color: #f2f2f2;
+    cursor: pointer;
+    border-radius: 5px;
+}
+
+.button-categories .btn:hover{
+    border-radius: 25%;
+    /* border-color:black; */
+    background-color: #dc3545;
+    transition: background-color 0.3s, color 0.3s; /* Hiệu ứng transition */
+
+}
+
+.button-categories {
+  display: block;
+  width: 500px;
+  /* justify-content: space-between; */
+  margin-right: auto;
+  margin-left: auto;
+} 
+
+.button-categories button {
+  flex: 1;
+  border: 1px solid black !important;
+
+  /* background-color: #4CAF50; Màu nền */
+    border: none;
+    color: white; /* Màu văn bản */
+    padding: 10px 20px; /* Kích thước */
+    text-align: center;
+    text-decoration: none;
+    display: inline-block;
+    font-size: 16px;
+    margin: 4px 2px;
+    cursor: pointer;
+    border-radius: 8px; /* Đường viền cong */
+    transition: background-color 0.3s, color 0.3s; /* Hiệu ứng transition */
+}
+
+.button-categories button .link-btn{
+  text-decoration: none;
+  color: #000;
+}
+
+
+/* begin for banner */
+  .banner .carousel-inner{
+    border-radius: 10px;
+
+  }  
+  .banner-img{
+    margin-top: 0;
+    margin-left: 4%;
+    padding: 0;
+    height: 259px;
+    object-fit: cover;
+    /* width: 110%; */
+    width: fit-content;
+    border-radius: 15px;
+    box-shadow: 3px 3px 5px rgba(0, 0, 0, 0.3);
+  }
+   .banner-fix img{
+    object-fit: cover !important;
+    height: 100% !important;
+    /* width: 100% !important; */
+    width: 100%;
+    margin-top: 0;
+  }
+
+/* end for banner */
+
+
+
+
+
+
+  
+
+  
+ 
+  /* begin css slider Recomment products */
+
+  .fa-solid{
+    color: #ff0000;
+  }
+  .slider-wrapper {
+    position: relative;
+  }
+  
+  .slider-wrapper .slide-button {
+    position: absolute;
+    top: 50%;
+    outline: none;
+    border: none;
+    height: 50px;
+    width: 50px;
+    z-index: 5;
+    color: #fff;
+    display: flex;
+    cursor: pointer;
+    font-size: 2.2rem;
+    background: #000;
+    align-items: center;
+    justify-content: center;
+    border-radius: 50%;
+    transform: translateY(-50%);
+  }
+  
+  .slider-wrapper .slide-button:hover {
+    background: #404040;
+  }
+  
+  .slider-wrapper .slide-button#prev-slide {
+    left: -25px;
+    display: none;
+  }
+  
+  .slider-wrapper .slide-button#next-slide {
+    right: -25px;
+  }
+  
+  .slider-wrapper .image-list {
+    display: grid;
+    grid-template-columns: repeat(10, 1fr);
+    gap: 18px;
+    font-size: 0;
+    list-style: none;
+    margin-bottom: 30px;
+    overflow-x: auto;
+    scrollbar-width: none;
+  }
+  
+  .slider-wrapper .image-list::-webkit-scrollbar {
+    display: none;
+  }
+  
+  .slider-wrapper .image-list .image-item {
+    width: 325px;
+    height: 400px;
+    object-fit: cover;
+  }
+
+  /* begin css card product */
+  .card{
+    border-radius: 10px;  
+  }
+  .card:hover{
+    border: none;
+  }
+  .card:hover img{
+    transform: scale(0.95);
+  }
+
+  .card img{
+    transition: transform 0.3s ease;
+    border-radius: 10px;  
+    /* padding: 0; */
+    margin:0;
+    height: 275px;
+    
+  }
+  .name-price{
+    display: flex;
+    justify-content: space-between;
+  }
+ 
+  /* end css card product */
+  .image-item{
+    border-radius: 10px;
+  }
+
+  .image-item{
+    transition: transform 0.3s ease;
+  }
+  .image-item:hover{
+    transform: scale(0.95);
+  }
+
+  .container .slider-scrollbar {
+    height: 24px;
+    width: 100%;
+    display: flex;
+    align-items: center;
+  }
+  
+  .slider-scrollbar .scrollbar-track {
+    background: #ccc;
+    width: 100%;
+    height: 2px;
+    display: flex;
+    align-items: center;
+    border-radius: 4px;
+    position: relative;
+  }
+  
+  .slider-scrollbar:hover .scrollbar-track {
+    height: 4px;
+  }
+  
+  .slider-scrollbar .scrollbar-thumb {
+    position: absolute;
+    background: #000;
+    top: 0;
+    bottom: 0;
+    width: 50%;
+    height: 100%;
+    cursor: grab;
+    border-radius: inherit;
+  }
+  
+  .slider-scrollbar .scrollbar-thumb:active {
+    cursor: grabbing;
+    height: 8px;
+    top: -2px;
+  }
+  
+  .slider-scrollbar .scrollbar-thumb::after {
+    content: "";
+    position: absolute;
+    left: 0;
+    right: 0;
+    top: -10px;
+    bottom: -10px;
+  }
+  
+  /* Styles for mobile and tablets */
+  @media only screen and (max-width: 1023px) {
+    .slider-wrapper .slide-button {
+      display: none !important;
+    }
+  
+    .slider-wrapper .image-list {
+      gap: 10px;
+      margin-bottom: 15px;
+      scroll-snap-type: x mandatory;
+    }
+  
+    .slider-wrapper .image-list .image-item {
+      width: 280px;
+      height: 380px;
+    }
+  
+    .slider-scrollbar .scrollbar-thumb {
+      width: 20%;
+    }
+  }
+
+  .icon_favorite{
+    color: red;
+  }
+  .favorite_icon{
+    border: none;
+    background-color: rgba(0, 0, 0, 0);
+  }
+  /* end css slider recomment */

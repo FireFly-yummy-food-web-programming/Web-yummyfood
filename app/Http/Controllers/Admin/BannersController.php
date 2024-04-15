@@ -8,7 +8,7 @@ use App\Models\Banner;
 
 class BannersController extends Controller
 {
-    public function index()
+    public function index(Request $request)
     {
         $title = 'List of Banners';
         $banners = Banner::all();
@@ -18,26 +18,41 @@ class BannersController extends Controller
 
     public function create()
     {
-        return view('admin.banner.add');
+        $title = "Add new Banner";
+        return view('admin.banner.add', compact('title'));
     }
 
     public function store(Request $request)
     {
         $request->validate([
             'name' => 'required',
-            'image' => 'required',
+            'image' => 'required|image|mimes:jpeg,png,jpg,gif|max:2048',
             'status' => 'required|in:IsActive,InActive',
         ]);
 
-        Banner::create($request->all());
+        $name = $request->name;
+        $description = $request->description;
+        $status = $request->status;
+        $fileName = $request->file('image')->getClientOriginalName();
+        $request->file('image')->storeAs('images', $fileName, 'public');
+        $banner = [
+            'name' => $name,
+            'image' => $fileName,
+            'description' => $description,
+            'status' => $status,
+        ];
+
+        Banner::create($banner);
 
         return redirect()->route('manage-banners')->with('success', 'Banner created successfully.');
     }
 
+
     public function edit($id)
     {
+        $title = "Edit banner";
         $banner = Banner::findOrFail($id);
-        return view('admin.banner.edit', compact('banner'));
+        return view('admin.banner.edit', compact('title', 'banner'));
     }
 
     public function update(Request $request, $id)

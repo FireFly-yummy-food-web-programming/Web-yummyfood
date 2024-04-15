@@ -1,7 +1,6 @@
 @extends('layouts.admin')
 @section('content')
-    {{-- @include('admin.contents.listsdishs') --}}
-    @include('admin.contents.listscategories')
+    @include('admin.contents.listsusers')
 @endsection
 @section('css')
     <style>

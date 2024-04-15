@@ -40,7 +40,6 @@
         </tbody>
     </table>
 </div>
-  
   <!-- Modal -->
 <form action="" method="POST" id="deleteCategoryForm">
     @csrf
@@ -53,7 +52,7 @@
               <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
             </div>
             <div class="modal-body">
-                <p>Are you sure you want to delete {{$category->category_name}} category?</p>
+                <p>Are you sure you want to delete this category?</p>
             </div>
             <div class="modal-footer">
               <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
@@ -74,7 +73,7 @@
               <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
             </div>
             <div class="modal-body">
-                <p>Are you sure you want to restore {{$category->category_name}} category?</p>
+                <p>Are you sure you want to restore this category?</p>
             </div>
             <div class="modal-footer">
               <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
@@ -117,18 +116,5 @@
     </tbody>
 </table>
   @section('js')
-        <script>
-            function handleDelete(id) {
-                var form = document.getElementById('deleteCategoryForm');
-                form.action = '/admin/delete-category/' + id;
-                $('#delete_category_modal').modal('show');
-                // console.log(form.action);
-            }
-
-            function handleRestore(id) {
-                var form = document.getElementById('restoreCategoryForm');
-                form.action = '/admin/restore-category/' + id;
-                $('#restore_category_modal').modal('show');
-            }
-        </script>
-  @endsection
+            <script src="{{asset('assets/js/modaldelete.js')}}"></script>
+ @endsection

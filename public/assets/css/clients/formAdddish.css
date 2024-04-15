@@ -1,0 +1,31 @@
+.input-add-dish{
+    width: 80%;
+}
+.form-add-dish{
+    border: 1px solid rgb(181, 181, 181, 0.2);
+    width: 50%;
+}
+.form-add-dish{
+    border: 1px solid rgb(181, 181, 181, 0.2);
+    width: 50%;
+    margin-left: 20%;
+}
+.form-add-dish .form{
+    display: grid;
+    grid-column: 100%;
+    margin-left: 15%;
+    padding: 20px;
+}
+.form-add-dish .button{
+    display: flex;
+    justify-content:space-around;
+}
+.form-add-dish .select-category{
+    padding: 0.375rem 0.75rem;
+    font-size: 1rem;
+    font-weight: 400;
+    line-height: 1.5;
+    outline: none;
+    border: var(--bs-border-width) solid var(--bs-border-color);
+    border-radius: 6px;
+}
