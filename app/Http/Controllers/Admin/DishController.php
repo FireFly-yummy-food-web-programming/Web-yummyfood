@@ -104,18 +104,21 @@ class DishController extends Controller
     $request->validate([
         'image_dish' => 'image|mimes:jpeg,png,jpg,gif|max:2048',
         'price' => 'numeric',
+        'discount' => 'numeric',
     ],[
         'image_dish.image' => 'The file is not in the correct format',
         'image_dish.mimes' => 'The file is not in the correct format',
         'price.numeric' => 'Invalid price',
+        'discount.numeric' => 'Invalid discount',
     ]);
     $dish = [
         'dish_name' =>  $request->input('dish_name'),
         'category_id' => $request->input('category_id'),
         'price' => $request->input('price'),
+        'discount' => $request->input('discount'),
         'detail' => $request->input('detail'),
     ];
-
+    // dd($dish);
     if ($request->hasFile('image_dish')) {
         $imageName = $request->file('image_dish')->getClientOriginalName(); // Lấy tên gốc của file
         $imageName = time() . '_' . $imageName; // Thêm timestamp để tránh trùng tên
