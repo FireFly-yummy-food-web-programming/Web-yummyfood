@@ -149,3 +149,9 @@ nav a:hover {
     color: #ffffff;
     padding:0;
 }
+
+.btn-showcart{
+    position: absolute;
+    right: 100px;
+    top: 15px;
+}

@@ -18,6 +18,7 @@
                 <th>Images</th>
                 <th>Details</th>
                 <th>Price</th>
+                <th>Discount</th>
                 <th style="width: 120px;">Action</th>
             </tr>
         </thead>
@@ -33,6 +34,7 @@
                     </td>
                     <td>{{$dish->details}}</td>
                     <td>{{$dish->price}}</td>
+                    <td>{{$dish->discount}}</td>
                     <td>
                         {{-- {{route('edit-dish',['id'=>$dish->dish_id])}} --}}
                         <a href="{{route('edit-dish',['id'=>$dish->dish_id])}}" class="btn btn-success btn-sm"><i class="fa-solid fa-pencil"></i></a>

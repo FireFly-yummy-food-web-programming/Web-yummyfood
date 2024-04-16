@@ -2,16 +2,17 @@
 
 namespace App\Models;
 
-use Illuminate\Database\Eloquent\Factories\HasFactory;
-use Illuminate\Database\Eloquent\Model;
 use Illuminate\Support\Facades\DB;
-
+use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\Eloquent\Relations\HasMany;
+use Illuminate\Database\Eloquent\Factories\HasFactory;
+// use Illuminate\Database\Eloquent\Relations\HasMany;
 class Dish extends Model
 {
     use HasFactory;
     protected $table = 'dish';
     protected $primaryKey = 'dish_id';
-    protected $fillable = ['category_id', 'image_dish', 'dish_name', 'details', 'price'];
+    protected $fillable = ['category_id', 'image_dish', 'dish_name', 'details', 'price','discount'];
     public function favorite(): HasMany
     {
         return $this->hasMany(Favorite::class, 'dish_id', 'dish_id');
@@ -46,6 +47,7 @@ class Dish extends Model
         $dish->image_dish = $data['image_dish'];
         $dish->details = $data['detail'];
         $dish->price = $data['price'];
+        $dish->discount = $data['discount'];
         $dish->save();
     }
     public function getDishDetail($id)
@@ -65,6 +67,7 @@ class Dish extends Model
                 'price' => $data['price'],
                 'details' => $data['detail'],
                 'image_dish' => $data['image_dish'],
+                'discount' => $data['discount'],
             ]);
     }
 

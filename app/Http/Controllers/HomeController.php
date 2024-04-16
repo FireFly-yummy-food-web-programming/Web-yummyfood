@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Http\Controllers\Controller;
+use App\Models\Dish;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Session;
@@ -38,6 +39,52 @@ class HomeController extends Controller
         return $isFavorite;
     
     }
-
-    
+    // function add to cart
+    public function cart()
+    {
+        return view('clients.cart');
+    }
+    public function addToCart($id)
+    {
+        $dish = Dish::findOrFail($id);
+ 
+        $cart = session()->get('cart', []);
+ 
+        if(isset($cart[$id])) {
+            $cart[$id]['quantity']++;
+        }  else {
+            $cart[$id] = [
+                "dish_name" => $dish->dish_name,
+                "image_dish" => $dish->image_dish,
+                "price" => $dish->price,
+                "discount" => $dish->discount,
+                "quantity" => 1
+            ];
+        }
+ 
+        session()->put('cart', $cart);
+        return redirect()->back()->with('success', 'Product add to cart successfully!');
+    }
+ 
+    public function update(Request $request)
+    {
+        if($request->id && $request->quantity){
+            $cart = session()->get('cart');
+            $cart[$request->id]["quantity"] = $request->quantity;
+            session()->put('cart', $cart);
+            session()->flash('success', 'Cart successfully updated!');
+        }
+    }
+ 
+    public function remove(Request $request)
+    {
+        if($request->id) {
+            $cart = session()->get('cart');
+            if(isset($cart[$request->id])) {
+                unset($cart[$request->id]);
+                session()->put('cart', $cart);
+            }
+            session()->flash('success', 'Product successfully removed!');
+        }
+    }    
 }

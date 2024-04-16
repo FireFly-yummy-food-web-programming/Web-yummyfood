@@ -45,6 +45,7 @@ class DishController extends Controller
             'image_dish' => 'required|image|mimes:jpeg,png,jpg,gif|max:2048',
             'price' => 'required|numeric',
             'detail' => 'required',
+            'discount' => 'numeric|max:100',
         ], [
             'dish_name.required' => 'Requires entering a dish name',
             'dish_name.unique' => 'The dish name already exists',
@@ -55,24 +56,24 @@ class DishController extends Controller
             'price.required' => 'Requires entering a dish price',
             'price.numeric' => 'Invalid price',
             'detail.required' => 'Requires entering a dish detail',
+            'discount.numeric' => 'Invalid discount',
+            'discount.max' => 'Invalid discount',
         ]);
-
-        $category_id = $request->category_id;
-        $price = $request->price;
-        $detail = $request->detail;
 
         // Kiểm tra xem tệp đã được tải lên chưa
         $fileName = $request->file('image_dish')->getClientOriginalName();
         $request->file('image_dish')->storeAs('images', $fileName, 'public');
         $dish = [
             'dish_name' =>  $request->input('dish_name'),
-            'category_id' => $category_id,
-            'price' => $price,
-            'detail' => $detail,
+            'category_id' => $request->input("category_id"),
+            'price' => $request->input('price'),
+            'detail' =>  $request->input("detail"),
             'image_dish' => $fileName,
+            'discount' => $request->input('discount'),
+            
         ];
         $this->dishs->addDish($dish);
-        return redirect()->route('add-dish')->with('msg', 'Added dish successfully');
+        return redirect()->route('manage-dish')->with('msg', 'Added dish successfully');
     }
 
     public function getFormEditdish(Request $request, $id = 0)
@@ -90,7 +91,6 @@ class DishController extends Controller
         } else {
             return redirect()->route('manage-dish')->with('msg', 'Link does not exist');
         }
-        // dd($dishDetail);
         return view('admin.dish.edit', compact('title', 'dishDetail', 'listCategories'));
     }
     public function postEditdish(Request $request)
@@ -104,18 +104,25 @@ class DishController extends Controller
     $request->validate([
         'image_dish' => 'image|mimes:jpeg,png,jpg,gif|max:2048',
         'price' => 'numeric',
+        'discount' => 'numeric',
+        'discount' => 'numeric|max:100',
     ],[
         'image_dish.image' => 'The file is not in the correct format',
         'image_dish.mimes' => 'The file is not in the correct format',
         'price.numeric' => 'Invalid price',
+        'discount.numeric' => 'Invalid discount',
+        'discount.numeric' => 'Invalid discount',
+        'discount.max' => 'Invalid discount',
     ]);
     $dish = [
         'dish_name' =>  $request->input('dish_name'),
         'category_id' => $request->input('category_id'),
         'price' => $request->input('price'),
+        'discount' => $request->input('discount'),
         'detail' => $request->input('detail'),
+        'discount' => $request->input('discount'),
     ];
-
+    // dd($dish);
     if ($request->hasFile('image_dish')) {
         $imageName = $request->file('image_dish')->getClientOriginalName(); // Lấy tên gốc của file
         $imageName = time() . '_' . $imageName; // Thêm timestamp để tránh trùng tên

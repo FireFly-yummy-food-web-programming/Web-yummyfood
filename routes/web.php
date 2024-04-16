@@ -37,6 +37,11 @@ Route::prefix('users')->name('users.')->group(function () {
     Route::get('/favorites/add/{id}', [FavoriteController::class, 'addToFavorite'])->name('favorites.add'); 
     Route::get('/listFavorites', [FavoriteController::class, 'getAllFavoriteOfUser'])->name('list-favorites');   
 
+    Route::get('cart', [HomeController::class, 'cart'])->name('cart');
+    Route::get('add-to-cart/{id}', [HomeController::class, 'addToCart'])->name('add_to_cart');
+    Route::patch('update-cart', [HomeController::class, 'update'])->name('update_cart');
+    Route::delete('remove-from-cart', [HomeController::class, 'remove'])->name('remove_from_cart');
+
 });
 
 Route::prefix('admin')->group(function () {
