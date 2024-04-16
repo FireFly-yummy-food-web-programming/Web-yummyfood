@@ -34,19 +34,19 @@ class LoginController extends Controller
         $password = $request->input('Password');
 
         $user = User::where('Username', $username)->first();
-
         if ($user) {
             if ($user->validatePassword($password)) {
                 if ($user->role === 'admin') {
                     // Lưu thông tin người dùng vào session
                     $request->session()->put('user_id', $user->user_id);
                     $request->session()->put('logged_in', true);
-
+                    $request->session()->put('user_name', $user->Name);
                     return redirect()->route('manage-contact');
                 } elseif ($user->role === 'customer') {
                     // Lưu thông tin người dùng vào session
                     $request->session()->put('user_id', $user->user_id);
                     $request->session()->put('logged_in', true);
+                    $request->session()->put('user_name', $user->Name);
                     $user_id =  $request->session()->get('user_id', $user->user_id);
                     $listDish =  DB::table('favorites')
                         ->join('dish', 'favorites.dish_id', '=', 'dish.dish_id')
@@ -79,6 +79,8 @@ class LoginController extends Controller
     $request->session()->forget('logged_in');
     $request->session()->forget('favoriteId');
     $request->session()->forget('favoriteNewId');
+    $request->session()->forget('cart');
+    $request->session()->forget('user_name');
     // Đăng xuất người dùng
     Auth::logout();
 

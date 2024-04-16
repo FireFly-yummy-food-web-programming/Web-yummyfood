@@ -65,6 +65,7 @@
                     <img src="https://cdn.sforum.vn/sforum/wp-content/uploads/2023/11/avatar-dep-89.jpg" alt="avatar" style="width: 50px;height:50px;border-radius:50%; margin-left:170px;">
                 </h5>
                 <ul class="dropdown-menu" aria-labelledby="userDropdown">
+                    <li style="padding-left: 15px;">Hello! <span style="color: blue">{{session('user_name')}}</span></li>
                     <li><a class="dropdown-item" href="{{route('users.logout') }}">Logout</a></li>
                     <li><a class="dropdown-item" href="{{route('users.list-favorites')}}">Favorite</a></li>
                 </ul>

@@ -58,7 +58,8 @@ class HomeController extends Controller
                 "image_dish" => $dish->image_dish,
                 "price" => $dish->price,
                 "discount" => $dish->discount,
-                "quantity" => 1
+                "quantity" => 1,
+                "user_id" => session()->get('user_id)')
             ];
         }
  
