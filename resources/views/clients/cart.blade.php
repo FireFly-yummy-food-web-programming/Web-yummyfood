@@ -1,6 +1,9 @@
 @extends('layouts.clients')
    
 @section('content')
+
+@dd(session('cart'))
+
 <h1 style="margin-top:5%; text-align: center">Cart Products</h1>
 <table  id="cart" class="table table-hover table-condensed">
     <thead>
