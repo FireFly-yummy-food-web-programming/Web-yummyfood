@@ -80,20 +80,22 @@ class UsersController extends Controller
     public function deleteUsers($id)
     {
         $user = $this->users->getUserById($id);
-
+    
         if (!empty($user)) {
             $isUserConstrained = $this->orders->isUserConstrained($id);
             $isContactConstrained = $this->contacts->isContactConstrained($id);
-
-            if ($isUserConstrained || $isContactConstrained) {
+            $isFavoriteConstrained = $this->favorite->isFavoriteConstrained($id);
+            $isCartConstrained = $this->cart->isCartConstrained($id);
+    
+            if ($isUserConstrained || $isContactConstrained || $isFavoriteConstrained || $isCartConstrained) {
                 $orderStatus = $this->orders->getOrderStatusByUserId($id);
                 $contactStatus = $this->contacts->getContactStatusByUserId($id);
-
-             if ($orderStatus === 'New order' || $orderStatus === 'Shipping orders'  || $contactStatus === 'Pending') {
-                    $msg = "Unable to delete this user. The user has pending orders or unresponded contacts.";
+    
+                if ($orderStatus === 'New order' || $orderStatus === 'Shipping orders' || $contactStatus === 'Pending' || $isFavoriteConstrained || $isCartConstrained) {
+                    $msg = "Unable to delete this user. The user has pending orders, unresponded contacts, or is in the favorite or cart.";
                 } else {
                     $deleteStatus = $this->users->softDeleteUser($id);
-
+    
                     if ($deleteStatus) {
                         $msg = "User deleted successfully";
                     } else {
@@ -102,7 +104,7 @@ class UsersController extends Controller
                 }
             } else {
                 $deleteStatus = $this->users->deleteUsers($id);
-
+    
                 if ($deleteStatus) {
                     $msg = "User deleted successfully";
                 } else {
@@ -112,10 +114,10 @@ class UsersController extends Controller
         } else {
             $msg = 'User does not exist';
         }
-
+    
         $listUsers = $this->users->getAllUsers();
         return redirect()->route('manage-users')->with(['msg' => $msg, 'listUsers' => $listUsers]);
-    } 
+    }
     public function getFormEditUsers(Request $request, $id)
     {
         $title = "Edit User";
@@ -142,7 +144,7 @@ class UsersController extends Controller
                 Rule::unique('users')->ignore($user_id, 'user_id'), // Thay 'id' bằng 'user_id'
                 'regex:/^[A-Za-z0-9]+$/'
             ],
-            'Password' => 'required|min:8',
+            // 'Password' => 'required|min:8',
             'Name' => 'required',
             'Phone' => 'required|numeric|digits:10',
             'Email' => [
@@ -154,8 +156,8 @@ class UsersController extends Controller
             'Username.required' => 'Username is required',
             'Username.unique' => 'Username already exists',
             'Username.regex' => 'Username must only contain letters and numbers',
-            'Password.required' => 'Password is required',
-            'Password.min' => 'Password must be at least 8 characters',
+            // 'Password.required' => 'Password is required',
+            // 'Password.min' => 'Password must be at least 8 characters',
             'Name.required' => 'Name is required',
             'Phone.required' => 'Phone number is required',
             'Phone.numeric' => 'Phone number must be numeric',
@@ -167,13 +169,13 @@ class UsersController extends Controller
     
         $dataUpdate = [
             'Username' => $request->input('Username'),
-            'Password' => bcrypt($request->input('Password')),
+            // 'Password' => bcrypt($request->input('Password')),
             'Name' => $request->input('Name'),
             'Phone' => $request->input('Phone'),
             'Email' => $request->input('Email'),
         ];
     
         $this->users->updateUser($user_id, $dataUpdate);
-        return back()->with('msg', 'User updated successfully');
+        return redirect(route('manage-users'))->with('msg', 'User updated successfully');
     }
 }

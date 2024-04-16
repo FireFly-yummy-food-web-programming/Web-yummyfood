@@ -41,6 +41,13 @@
                 @enderror
             </div>
             <div class="mb-3">
+                <label for="">Discount</label>
+                <input type="text" name="discount" class="form-control input-add-dish" id="" placeholder="Discount" value="{{old('discount')?? $dishDetail->discount}}">
+                @error('discount')
+                    <span style="color: red">{{$message}}</span>
+                @enderror
+            </div>
+            <div class="mb-3">
                 <label for="">Details</label>
                 <input type="text" name="detail" class="form-control input-add-dish" id="" placeholder="Detail" value="{{old('detail')?? $dishDetail->details}}">
                 @error('detail')

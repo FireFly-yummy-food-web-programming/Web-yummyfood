@@ -185,7 +185,7 @@
                             <div>
                                 <a href="#" style="margin-right: 56px; display: inline-block; width: 125px;"
                                     class="btn btn-primary">Detail</a>
-                                <a href="#" class="btn btn-danger">Add to cart</a>
+                                <a href="{{session()->get('logged_in') ? route('users.add_to_cart', $value->dish_id): route('users.login')}}" class="btn btn-danger">Add to cart</a>
                             </div>
                         </div>
                     </li>
