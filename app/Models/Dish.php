@@ -12,7 +12,7 @@ class Dish extends Model
     use HasFactory;
     protected $table = 'dish';
     protected $primaryKey = 'dish_id';
-    protected $fillable = ['category_id', 'image_dish', 'dish_name', 'details', 'price'];
+    protected $fillable = ['category_id', 'image_dish', 'dish_name', 'details', 'price','discount'];
     public function favorite(): HasMany
     {
         return $this->hasMany(Favorite::class, 'dish_id', 'dish_id');

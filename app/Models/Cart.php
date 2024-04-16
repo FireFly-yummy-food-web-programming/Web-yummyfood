@@ -12,6 +12,6 @@ class Cart extends Model
     protected $table = 'cart';
     public function isCartConstrained($userId)
     {
-        return $this->where('user_id', $userId)->exists();
+        return $this->where('user_id', $userId)->exists(); 
     }
 }
