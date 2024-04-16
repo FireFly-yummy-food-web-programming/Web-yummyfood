@@ -41,4 +41,8 @@ class Favorite extends Model
                         ->exists();
         return $isFavorite;
     }
+    public function isFavoriteConstrained($userId)
+    {
+        return $this->where('user_id', $userId)->exists();
+    }
 }   

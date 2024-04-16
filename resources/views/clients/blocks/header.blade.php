@@ -56,6 +56,7 @@
             <li class="nav-item">
                 <a class="nav-link active users-navbar-contactus" aria-current="page" href="{{route('users.register')}}" style="padding-top: 50px;">Sign in</a>
             </li>
+            
             @endif
             <div>
             @if (session('logged_in'))
@@ -67,6 +68,9 @@
                     <li><a class="dropdown-item" href="{{route('users.logout') }}">Logout</a></li>
                     <li><a class="dropdown-item" href="{{route('users.list-favorites')}}">Favorite</a></li>
                 </ul>
+            </li>
+            <li class="nav-item btn-showcart">
+                <a class="btn btn-primary" href="{{ route('users.cart') }}" style="color: aliceblue; text-decoration: none"><i class="fa fa-shopping-cart" aria-hidden="true"></i> Cart <span class="badge badge-pill badge-danger">{{ count((array) session('cart')) }}</span></a>
             </li>
             @endif
           </ul>
