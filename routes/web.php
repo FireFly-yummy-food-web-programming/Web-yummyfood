@@ -13,6 +13,7 @@ use App\Http\Controllers\Admin\BannersController;
 use App\Http\Controllers\Admin\UsersController;
 use App\Http\Controllers\Clients\ContactsController;
 use App\Http\Controllers\Clients\FavoriteController;
+use App\Http\Controllers\Clients\HistoryOrderController;
 /*
 |--------------------------------------------------------------------------
 | Web Routes
@@ -41,7 +42,8 @@ Route::prefix('users')->name('users.')->group(function () {
     Route::get('add-to-cart/{id}', [HomeController::class, 'addToCart'])->name('add_to_cart');
     Route::patch('update-cart', [HomeController::class, 'update'])->name('update_cart');
     Route::delete('remove-from-cart', [HomeController::class, 'remove'])->name('remove_from_cart');
-
+    Route::get('history-order', [HistoryOrderController::class, 'index'])->name('history-order');
+    Route::get('information-line/{id}', [HistoryOrderController::class, 'show'])->name('information-line');
 });
 
 Route::prefix('admin')->group(function () {

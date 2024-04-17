@@ -68,6 +68,7 @@
                     <li style="padding-left: 15px;">Hello! <span style="color: blue">{{session('user_name')}}</span></li>
                     <li><a class="dropdown-item" href="{{route('users.logout') }}">Logout</a></li>
                     <li><a class="dropdown-item" href="{{route('users.list-favorites')}}">Favorite</a></li>
+                    <li><a class="dropdown-item" href="{{route('users.history-order')}}">History order</a></li>
                 </ul>
             </li>
             <li class="nav-item btn-showcart">
