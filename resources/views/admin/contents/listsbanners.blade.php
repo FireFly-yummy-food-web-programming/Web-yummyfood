@@ -24,7 +24,7 @@
                     <td>{{$index+1}}</td>
                     <td>{{$banner->name}}</td>
                     <td>
-                        <img src="/storage/banners/{{ $banner->image }}" alt="image" style="width:70%">
+                        <img src="{{ asset('storage/images/'. $banner->image) }}" alt="image" style="width:50%">
                     </td>
                     <td>{{$banner->description}}</td>
                     <td>{{$banner->status}}</td>

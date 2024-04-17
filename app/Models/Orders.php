@@ -23,10 +23,13 @@ class Orders extends Model
         $orderList = DB::table($this->table)
             ->join('users', 'orders.user_id', '=', 'users.user_id')
             ->join('order_detail', 'order_detail.order_id', '=', 'orders.order_id')
-            ->select('orders.*', 'users.Username', 'users.Email', 'order_detail.*')
+            ->select('orders.*',"users.user_id", 'users.Username', 'users.Email', 'order_detail.*')
             ->get();
+        // dd($orderList);
         return $orderList;
     }
+    
+
 
     public function getOrderStatusByUserId($userId)
     {
