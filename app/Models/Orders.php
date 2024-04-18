@@ -5,7 +5,6 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Support\Facades\DB;
-// use  App\Models\Contacts;
 
 class Orders extends Model
 {
@@ -22,14 +21,20 @@ class Orders extends Model
     {
         $orderList = DB::table($this->table)
             ->join('users', 'orders.user_id', '=', 'users.user_id')
-            ->join('order_detail', 'order_detail.order_id', '=', 'orders.order_id')
-            ->select('orders.*',"users.user_id", 'users.Username', 'users.Email', 'order_detail.*')
+            ->join('dish', 'dish.dish_id', '=', 'orders.dish_id')
+            ->select('orders.*',"users.*", 'users.Email','dish.*')
             ->get();
-        // dd($orderList);
         return $orderList;
     }
     
-
+    public function isDishConstrained($id)
+    {
+        $order = DB::table($this->table)
+            ->select('orders.status', 'order.dish_id')
+            ->where('order.dish_id', $id)
+            ->first();
+        return (!empty($order));
+    }
 
     public function getOrderStatusByUserId($userId)
     {
