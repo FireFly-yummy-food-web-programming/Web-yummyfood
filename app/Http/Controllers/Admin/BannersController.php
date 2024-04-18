@@ -59,15 +59,31 @@ class BannersController extends Controller
     {
         $request->validate([
             'name' => 'required',
-            'image' => 'required',
+            'image' => 'required|image|mimes:jpeg,png,jpg,gif|max:2048',
             'status' => 'required|in:IsActive,InActive',
         ]);
 
+        $name = $request->name;
+        $description = $request->description;
+        $status = $request->status;
+
+        if ($request->hasFile('image')) {
+            $fileName = $request->file('image')->getClientOriginalName();
+            $request->file('image')->storeAs('images', $fileName, 'public');
+        } else {
+            return redirect()->back()->withInput()->withErrors(['image' => 'Please upload an image.']);
+        }
+
         $banner = Banner::findOrFail($id);
-        $banner->update($request->all());
+        $banner->name = $name;
+        $banner->image = $fileName;
+        $banner->description = $description;
+        $banner->status = $status;
+        $banner->save();
 
         return redirect()->route('manage-banners')->with('success', 'Banner updated successfully.');
     }
+
 
     public function destroy($id)
     {
