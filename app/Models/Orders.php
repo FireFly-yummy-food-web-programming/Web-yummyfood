@@ -30,8 +30,8 @@ class Orders extends Model
     public function isDishConstrained($id)
     {
         $order = DB::table($this->table)
-            ->select('orders.status', 'order.dish_id')
-            ->where('order.dish_id', $id)
+            ->select('orders.status', 'orders.dish_id')
+            ->where('orders.dish_id', $id)
             ->first();
         return (!empty($order));
     }
