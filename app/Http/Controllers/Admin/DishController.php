@@ -6,16 +6,15 @@ use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use  App\Models\Dish;
 use App\Models\Orders;
-use App\Models\Order_detail;
 
 class DishController extends Controller
 {
     private $dishs;
-    private $order_detail;
+    private $orders;
     public function __construct()
     {
         $this->dishs = new Dish();
-        $this->order_detail = new Order_detail();
+        $this->orders = new Orders();
     }
     public function getDish(Request $request)
     {
@@ -146,7 +145,7 @@ class DishController extends Controller
         if (empty($dishDetail[0])) {
             $msg = 'Dish does not exist';
         }
-        $isDishConstrained = $this->order_detail->isDishConstrained($id);
+        $isDishConstrained = $this->orders->isDishConstrained($id);
         if ($isDishConstrained) {
             if ($isDishConstrained == 'Shipping orders') {
                 $msg = "This item cannot be deleted because the order has been shipped";

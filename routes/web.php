@@ -53,7 +53,6 @@ Route::prefix('users')->name('users.')->group(function () {
     Route::get('/cancel', [StripeController::class, 'cancel'])->name('cancel');
 
     Route::get('history-order', [HistoryOrderController::class, 'index'])->name('history-order');
-    Route::get('information-line/{id}', [HistoryOrderController::class, 'show'])->name('information-line');
 });
 
 Route::prefix('admin')->group(function () {

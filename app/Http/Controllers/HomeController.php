@@ -24,8 +24,7 @@ class HomeController extends Controller
             // Lấy đơn hàng của người dùng
             $user_orders = DB::table('orders')
                 ->join('users', 'orders.user_id', '=', 'users.user_id')
-                ->join('order_detail', 'order_detail.order_id', '=', 'orders.order_id')
-                ->select('orders.*', 'users.user_id', 'users.Username', 'users.Email', 'order_detail.*')
+                ->select('orders.*', 'users.user_id', 'users.Username', 'users.Email', 'orders.*')
                 ->where('orders.user_id', $user_id)
                 ->get();
 

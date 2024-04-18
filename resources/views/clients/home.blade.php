@@ -29,7 +29,7 @@
                     <div class="carousel-inner">
                         @foreach ($bigBanner as $value)
                             <div class="carousel-item active" data-bs-interval="2300">
-                                <img src="/storage/banners/{{ $value->image }}"
+                                <img src="/storage/images/{{ $value->image }}"
                                     class="d-block w-100 _9puaeP OooQQJ  banner-img" alt="...">
                             </div>
                         @endforeach

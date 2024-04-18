@@ -15,11 +15,7 @@
             <th>Price</th>
             <th>Total price</th>
             <th>Date Order</th>
-            <th>Address</th>
             <th>Phone</th>
-            <th>Payment</th>
-            <th>Status</th>
-            <th>Delivery day</th>
         </tr>
     </thead>
     <tbody>
@@ -33,9 +29,7 @@
                 <td>{{$order->price}}</td>
                 <td>{{$order->total_price}}</td>
                 <td>{{$order->order_date}}</td>
-                <td>{{$order->phone}}</td>
-                <td>{{$order->address}}</td>
-                <td>{{$order->payment}}</td>
+                <td>{{$order->Phone}}</td>
                 <td>
                     <form action="{{route('order.updateStatus') }}" method="POST">
                         <select id="statusSelectorder" name="status" onchange="this.form.submit()" >
@@ -65,7 +59,6 @@
                         <input type="hidden" name="order_id" value="{{$order->order_id}}">
                     </form>
                 </td>   
-                <td>{{$order->delivery_date}}</td>
             </tr>
             @endforeach
         @endif

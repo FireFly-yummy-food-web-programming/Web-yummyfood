@@ -15,71 +15,12 @@ class HistoryOrderController extends Controller
         $user_id = session()->get('user_id');
         $listDish = DB::table('orders')
                 ->join('users', 'orders.user_id', '=', 'users.user_id')
-                ->join('order_detail', 'order_detail.order_id', '=', 'orders.order_id')
-                ->join('dish', 'dish.dish_id', '=', 'order_detail.dish_id')
-                ->select('orders.*', 'users.user_id', 'users.Username', 'users.Email', 'order_detail.*', 'dish.*')
+                ->join('dish', 'dish.dish_id', '=', 'orders.dish_id')
+                ->select('orders.*', 'users.user_id', 'users.Username', 'users.Email', 'dish.*')
                 ->where('orders.user_id', $user_id)
                 ->get();
-        // dd( $listDish);
+        // dd($listDish);
         return view('clients.historyOrders', compact('listDish'));
     }
 
-    /**
-     * Show the form for creating a new resource.
-     */
-    public function create()
-    {
-        //
-    }
-
-    /**
-     * Store a newly created resource in storage.
-     */
-    public function store(Request $request)
-    {
-        //
-    }
-
-    /**
-     * Display the specified resource.
-     */
-    public function show(string $id)
-    {
-        $user_id = session()->get('user_id');
-        $listDish = DB::table('orders')
-                ->join('users', 'orders.user_id', '=', 'users.user_id')
-                ->join('order_detail', 'order_detail.order_id', '=', 'orders.order_id')
-                ->join('dish', 'dish.dish_id', '=', 'order_detail.dish_id')
-                ->select('orders.*', 'users.user_id', 'users.Username', 'users.Email', 'order_detail.*', 'dish.*')
-                ->where('orders.user_id', $user_id)
-                ->where('order_detail.dish_id', $id)
-                ->first();
-        // dd( $listDish);
-        // dd($listDish->status);
-        return view('clients.orderDetail', compact('listDish'));
-    }
-
-    /**
-     * Show the form for editing the specified resource.
-     */
-    public function edit(string $id)
-    {
-        //
-    }
-
-    /**
-     * Update the specified resource in storage.
-     */
-    public function update(Request $request, string $id)
-    {
-        //
-    }
-
-    /**
-     * Remove the specified resource from storage.
-     */
-    public function destroy(string $id)
-    {
-        //
-    }
 }
