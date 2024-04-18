@@ -1,18 +1,23 @@
 <?php
 
+use Illuminate\Validation\Rules\Can;
 use Illuminate\Support\Facades\Route;
-use App\Http\Controllers\Admin\AdminController;
-use App\Http\Controllers\Clients\UserController;
-use App\Http\Controllers\Auth\RegisterController;
-use App\Http\Controllers\LoginController;
+// use App\Http\Controllers\Clients\CartController;
+use App\Http\Controllers\CartController;
 use App\Http\Controllers\HomeController;
+use App\Http\Controllers\LoginController;
+use App\Http\Controllers\StripeController;
 use App\Http\Controllers\Admin\DishController;
-use App\Http\Controllers\Admin\OrdersController;
-use App\Http\Controllers\Admin\CategoriesController;
-use App\Http\Controllers\Admin\BannersController;
+use App\Http\Controllers\Admin\AdminController;
 use App\Http\Controllers\Admin\UsersController;
+use App\Http\Controllers\Admin\OrdersController;
+use App\Http\Controllers\Clients\UserController;
+use App\Http\Controllers\Admin\BannersController;
+use App\Http\Controllers\Auth\RegisterController;
+use App\Http\Controllers\Admin\CategoriesController;
 use App\Http\Controllers\Clients\ContactsController;
 use App\Http\Controllers\Clients\FavoriteController;
+
 /*
 |--------------------------------------------------------------------------
 | Web Routes
@@ -37,10 +42,15 @@ Route::prefix('users')->name('users.')->group(function () {
     Route::get('/favorites/add/{id}', [FavoriteController::class, 'addToFavorite'])->name('favorites.add'); 
     Route::get('/listFavorites', [FavoriteController::class, 'getAllFavoriteOfUser'])->name('list-favorites');   
 
+    Route::get('/', [HomeController::class, 'index']);
     Route::get('cart', [HomeController::class, 'cart'])->name('cart');
     Route::get('add-to-cart/{id}', [HomeController::class, 'addToCart'])->name('add_to_cart');
     Route::patch('update-cart', [HomeController::class, 'update'])->name('update_cart');
     Route::delete('remove-from-cart', [HomeController::class, 'remove'])->name('remove_from_cart');
+
+    Route::post('/session', [StripeController::class, 'session'])->name('session');
+    Route::get('/success', [StripeController::class, 'success'])->name('success');
+    Route::get('/cancel', [StripeController::class, 'cancel'])->name('cancel');
 
 });
 

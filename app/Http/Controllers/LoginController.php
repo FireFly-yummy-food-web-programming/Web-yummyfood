@@ -11,7 +11,8 @@ use App\Models\Favorite;
 use Illuminate\Support\Facades\Validator;
 
 class LoginController extends Controller
-{
+{   
+    
     public function showLoginForm()
     {
         return view('clients.login');
@@ -41,6 +42,8 @@ class LoginController extends Controller
                     $request->session()->put('user_id', $user->user_id);
                     $request->session()->put('logged_in', true);
                     $request->session()->put('user_name', $user->Name);
+                    $request->session()->put('cart', []);
+                    $request->session()->put('numberCart', []);
                     return redirect()->route('manage-contact');
                 } elseif ($user->role === 'customer') {
                     // Lưu thông tin người dùng vào session
@@ -48,6 +51,9 @@ class LoginController extends Controller
                     $request->session()->put('logged_in', true);
                     $request->session()->put('user_name', $user->Name);
                     $user_id =  $request->session()->get('user_id', $user->user_id);
+                    $numberCart = DB::table('cart')->where('user_id', session('user_id'))->get()->count();
+                    $request->session()->put('numberCart',$numberCart);
+                    // dd(session('numberCart'));
                     $listDish =  DB::table('favorites')
                         ->join('dish', 'favorites.dish_id', '=', 'dish.dish_id')
                         ->where('favorites.user_id', $user_id)
@@ -72,6 +78,7 @@ class LoginController extends Controller
             ->withErrors($validator)
             ->withInput();
     }
+    
     public function logout(Request $request)
 {
     // Xóa thông tin người dùng từ session
