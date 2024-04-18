@@ -41,12 +41,12 @@ class FavoriteController extends Controller
             $favoriteId[] = $dish_id;
             $request->session()->put('favoriteId', $favoriteId);
         }
-        
+
         return back();
     }
-    
 
-    public function getAllFavoriteOfUser(Request $request){
+    public function getAllFavoriteOfUser(Request $request)
+    {
         $user_id = $request->session()->get('user_id');
         $listDish = $this->favorite->listFavorite($user_id);
         return view('clients.listFavorite', compact('listDish'));

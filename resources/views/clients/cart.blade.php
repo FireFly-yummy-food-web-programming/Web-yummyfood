@@ -34,13 +34,11 @@
                             </div>
                         </div>
                     </td>
-                    {{-- <td data-th="name product"></td> --}}
                     <td data-th="Price">${{ $details['price'] }}</td>
                     <td data-th="Quantity">
                         <input type="number" value="{{ $details['quantity'] }}" class="form-control quantity cart_update" min="1" />
                     </td>
                     <td data-th="Price">${{ $details['discount'] }}</td>
-                    {{-- <td data-th="Subtotal" class="text-center">${{ $details['price'] * $details['quantity']}}</td> --}}
                     <td data-th="Subtotal" class="text-center">${{ $subdiscount }}</td>
                     <td class="actions" data-th="">
                         <button class="btn btn-danger btn-sm cart_remove"><i class="fa fa-trash-o"></i> Delete</button>

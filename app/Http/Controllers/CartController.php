@@ -15,8 +15,6 @@ class CartController extends Controller
 
     public function addToCart($id)
     {
-        // Xử lý logic thêm sản phẩm vào giỏ hàng ở đây
-        // Ví dụ:
         $cartItem = new Cart();
         $cartItem->dish_id = $id; // Giả sử dish_id là cột trong bảng Cart để lưu ID sản phẩm
         $cartItem->user_id = auth()->user()->id; // Lưu user_id nếu bạn đã đăng nhập
@@ -26,7 +24,6 @@ class CartController extends Controller
         $cartItem->price;
         $cartItem->discount;
         $cartItem->save();
-
         return redirect()->back()->with('success', 'Product added to cart successfully!');
     }
 }

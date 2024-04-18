@@ -17,7 +17,7 @@ class CategoriesController extends Controller
     {
         $title = 'List of Categories';
         $listCategories = $this->categories->getAllCategories();
-          return view('admin.dashboard.categories', compact('title', 'listCategories'));  
+        return view('admin.dashboard.categories', compact('title', 'listCategories'));
     }
     public function getFormAddCategory(Request $request)
     {
@@ -39,7 +39,6 @@ class CategoriesController extends Controller
     }
     public function deleteCategory($id = 0)
     {
-
         if (!empty($id)) {
             $categoryDetail = $this->categories->getCategoryDetail($id);
             if (!empty($categoryDetail[0])) {

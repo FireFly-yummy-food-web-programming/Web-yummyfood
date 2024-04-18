@@ -16,10 +16,8 @@ class HomeController extends Controller
 
     public function index(Request $request)
     {
-        // $listDish = DB::table('dish')->limit(10)->get();
         $user_id = $request->session()->get('user_id');
         $listDish = [];
-
         if ($user_id) {
             // Lấy đơn hàng của người dùng
             $user_orders = DB::table('orders')
@@ -75,8 +73,6 @@ class HomeController extends Controller
     public function addToCart($id)
     {   
         $dish = Dish::findOrFail($id);
-        // dd($dish);
-
         // Kiểm tra xem sản phẩm đã có trong giỏ hàng chưa
         $existingCartItem = Cart::where('user_id', session('user_id'))
         ->where('dish_id', $dish->dish_id)
@@ -90,7 +86,6 @@ class HomeController extends Controller
             ->update([
                 'quantity' => $quantity
             ]);
-            // $existingCartItem->save();
         } else {
             // Nếu chưa có, thêm sản phẩm vào giỏ hàng
             $cartItem = new Cart();
@@ -104,8 +99,7 @@ class HomeController extends Controller
             $cartItem->updated_at = $dish->created_at;
             $cartItem->created_at = $dish->created_at;
             $cartItem->save();
-        }
- 
+        } 
         $cart = session()->get('cart', []);
 
         if (isset($cart[$id])) {
@@ -120,17 +114,7 @@ class HomeController extends Controller
                 "user_id" => session('user_id'),
             ];
         }
-
         session()->put('cart', $cart);
-        // session()->forget('cart');
-        // $carts = DB::table('cart')
-        //                 ->where('user_id',session('user_id'))
-        //                 ->get();
-        //             // $array = [];
-        // foreach ($carts as $cart){
-            
-        //     session()->push('cart', $cart);
-        // }
         return redirect()->back()->with('success', 'Product add to cart successfully!');
     }
 

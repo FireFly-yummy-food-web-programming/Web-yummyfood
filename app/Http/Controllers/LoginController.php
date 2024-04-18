@@ -53,7 +53,6 @@ class LoginController extends Controller
                     $user_id =  $request->session()->get('user_id', $user->user_id);
                     $numberCart = DB::table('cart')->where('user_id', session('user_id'))->get()->count();
                     $request->session()->put('numberCart',$numberCart);
-                    // dd(session('numberCart'));
                     $listDish =  DB::table('favorites')
                         ->join('dish', 'favorites.dish_id', '=', 'dish.dish_id')
                         ->where('favorites.user_id', $user_id)
