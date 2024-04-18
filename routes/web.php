@@ -17,7 +17,7 @@ use App\Http\Controllers\Auth\RegisterController;
 use App\Http\Controllers\Admin\CategoriesController;
 use App\Http\Controllers\Clients\ContactsController;
 use App\Http\Controllers\Clients\FavoriteController;
-
+use App\Http\Controllers\Clients\HistoryOrderController;
 /*
 |--------------------------------------------------------------------------
 | Web Routes
@@ -52,6 +52,8 @@ Route::prefix('users')->name('users.')->group(function () {
     Route::get('/success', [StripeController::class, 'success'])->name('success');
     Route::get('/cancel', [StripeController::class, 'cancel'])->name('cancel');
 
+    Route::get('history-order', [HistoryOrderController::class, 'index'])->name('history-order');
+    Route::get('information-line/{id}', [HistoryOrderController::class, 'show'])->name('information-line');
 });
 
 Route::prefix('admin')->group(function () {

@@ -62,12 +62,13 @@
             @if (session('logged_in'))
             <li class="nav-item dropdown ">
                 <h5 class="nav-link dropdown-toggle" id="userDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
-                    <img src="https://cdn.sforum.vn/sforum/wp-content/uploads/2023/11/avatar-dep-89.jpg" alt="avatar" style="width: 50px;height:50px;border-radius:50%; margin-left:170px;">
+                    <img src="https://tophinhanh.net/wp-content/uploads/2023/11/avatar-heo-de-thuong-10.jpg" alt="avatar" style="width: 50px;height:50px;border-radius:50%; margin-left:170px;">
                 </h5>
                 <ul class="dropdown-menu" aria-labelledby="userDropdown">
                     <li style="padding-left: 15px;">Hello! <span style="color: blue">{{session('user_name')}}</span></li>
                     <li><a class="dropdown-item" href="{{route('users.logout') }}">Logout</a></li>
                     <li><a class="dropdown-item" href="{{route('users.list-favorites')}}">Favorite</a></li>
+                    <li><a class="dropdown-item" href="{{route('users.history-order')}}">History order</a></li>
                 </ul>
             </li>
             <li class="nav-item btn-showcart">
