@@ -50,11 +50,11 @@
             <div class="col-md-4">
                 <div class="banner-fix">
                     <img width="invalid-value" height="invalid-value" width="100%" alt="Banner" class="_9puaeP OooQQJ"
-                        style="object-fit: cover" importance="height;width" src="/storage/banners/banner-sale.png">
+                        style="object-fit: cover" importance="height;width" src="/storage/images/banner-sale.png">
                 </div>
                 <div class="banner-fix" style="padding-top:10px ">
                     <img width="invalid-value" height="invalid-value" alt="Banner" class="_9puaeP OooQQJ"
-                        style="object-fit: cover" src="/storage/banners/banner-saler.png">
+                        style="object-fit: cover" src="/storage/images/banner-saler.png">
                 </div>
             </div>
         </div>

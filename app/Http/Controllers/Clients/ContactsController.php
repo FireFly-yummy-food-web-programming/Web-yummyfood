@@ -13,10 +13,10 @@ class ContactsController extends Controller
         if (session('logged_in')) {
             return view('clients.contact');
         }
-    
+
         return view('clients.login');
     }
-    
+
     public function submitContact(Request $request)
     {
         // Validate the request data
@@ -27,7 +27,7 @@ class ContactsController extends Controller
 
         // Create a new instance of the Contacts model
         $contact = new Contacts();
-        
+
         // Set the values for the columns in the 'contacts' table
         $contact->subject = $validatedData['subject'];
         $contact->message = $validatedData['message'];

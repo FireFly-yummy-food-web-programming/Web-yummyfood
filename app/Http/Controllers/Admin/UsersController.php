@@ -30,53 +30,7 @@ class UsersController extends Controller
         $title = 'List of users';
         $listUsers = $this->users->getAllUsers();
         return view('admin.dashboard.users', compact('title', 'listUsers'));
-    }
-
-    public function getFormAddUsers(Request $request)
-    {
-        $title = "Add new User";
-        return view('admin.users.add', compact('title'));
-    }
-    
-    public function postAddUsers(Request $request)
-    {
-        $request->validate([
-            'Username' => 'required|unique:users|regex:/^[A-Za-z0-9]+$/',
-            'Password' => 'required|min:8',
-            'Name' => 'required',
-            'Phone' => 'required|numeric|digits:10',
-            'Email' => 'required|email|unique:users',
-        ], [
-            'Username.required' => 'Username is required',
-            'Username.unique' => 'Username already exists',
-            'Username.regex' => 'Username must only contain letters and numbers',
-            'Password.required' => 'Password is required',
-            'Password.min' => 'Password must be at least 8 characters',
-            'Name.required' => 'Name is required',
-            'Phone.required' => 'Phone number is required',
-            'Phone.numeric' => 'Phone number must be numeric',
-            'Phone.digits' => 'Phone number must be 10 digits',
-            'Email.required' => 'Email is required',
-            'Email.email' => 'Invalid email format',
-            'Email.unique' => 'Email already exists',
-        ]);
-    
-        // Hash the password
-        $hashedPassword = bcrypt($request->input('Password'));
-    
-        $dataInsert = [
-            'Username' => $request->input('Username'),
-            'Password' => $hashedPassword,
-            'Name' => $request->input('Name'),
-            'Phone' => $request->input('Phone'),
-            'Email' => $request->input('Email'),
-            'role' => 'customer',
-        ];
-    
-        $this->users->addUser($dataInsert);
-        return redirect()->route('manage-users')->with('msg', 'User added successfully');
-    }
-    
+    }  
     public function deleteUsers($id)
     {
         $user = $this->users->getUserById($id);
@@ -144,7 +98,6 @@ class UsersController extends Controller
                 Rule::unique('users')->ignore($user_id, 'user_id'), // Thay 'id' bằng 'user_id'
                 'regex:/^[A-Za-z0-9]+$/'
             ],
-            // 'Password' => 'required|min:8',
             'Name' => 'required',
             'Phone' => 'required|numeric|digits:10',
             'Email' => [
@@ -156,8 +109,6 @@ class UsersController extends Controller
             'Username.required' => 'Username is required',
             'Username.unique' => 'Username already exists',
             'Username.regex' => 'Username must only contain letters and numbers',
-            // 'Password.required' => 'Password is required',
-            // 'Password.min' => 'Password must be at least 8 characters',
             'Name.required' => 'Name is required',
             'Phone.required' => 'Phone number is required',
             'Phone.numeric' => 'Phone number must be numeric',
@@ -169,7 +120,6 @@ class UsersController extends Controller
     
         $dataUpdate = [
             'Username' => $request->input('Username'),
-            // 'Password' => bcrypt($request->input('Password')),
             'Name' => $request->input('Name'),
             'Phone' => $request->input('Phone'),
             'Email' => $request->input('Email'),
