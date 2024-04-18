@@ -68,7 +68,7 @@ class StripeController extends Controller
                     'dish_id' => $dishId,
                     // 'dish_name' => $item['dish_name'],
                     // 'image_dish' => $item['image_dish'],
-                    'totalprice' => $item['price'],
+                    'total_price' => $item['price'],
                     'discount' => $item['discount'],
                     'quantity' => $item['quantity'],
                     'user_id' => $item['user_id'],
@@ -89,6 +89,7 @@ class StripeController extends Controller
 
         // Xóa session 'cart' sau khi đã chèn dữ liệu thành công vào bảng 'cart'
         session()->forget('cart');
+            
         return "Thanks for you order You have just completed your payment. The seeler will reach out to you as soon as possible";
     }
  
